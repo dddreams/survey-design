@@ -26,9 +26,10 @@ create table tbl_survey  (
   survey_name            varchar(64)    not null                comment '问卷名称',
   survey_desc            varchar(500)   default null            comment '问卷说明描述',
   survey_type            varchar(3)     default null            comment '问卷类型',
+  survey_status          char(1)        default '0'             comment '问卷状态（0：未发布，1：收集中，2：已结束）',
   create_time            datetime                               comment '创建时间',
   user_id                bigint(20)     default null            comment '创建人',
-  status                 char(1)        default '0'             comment '1：有效，0：无效',
+  status                 char(1)        default '0'             comment '数据状态（1：有效，0：无效）',
   book_code              char(12)       default ''              comment '帐套编码',
   primary key (survey_id)
 ) engine=innodb auto_increment=1 comment = '问卷表';
