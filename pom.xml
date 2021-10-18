@@ -198,6 +198,13 @@
                 <version>${surdes.version}</version>
             </dependency>
 
+            <!-- 问卷业务相关模块-->
+            <dependency>
+                <groupId>com.shure.surdes</groupId>
+                <artifactId>surdes-survey</artifactId>
+                <version>${surdes.version}</version>
+            </dependency>
+
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.shure.surdes</groupId>
@@ -215,6 +222,7 @@
         <module>surdes-quartz</module>
         <module>surdes-generator</module>
         <module>surdes-common</module>
+        <module>surdes-survey</module>
     </modules>
     <packaging>pom</packaging>
 

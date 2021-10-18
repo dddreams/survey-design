@@ -21,7 +21,7 @@ set foreign_key_checks = 0;
 -- table structure for tb_survey
 -- ----------------------------
 drop table if exists tb_survey;
-create table tbl_survey  (
+create table tb_survey  (
   survey_id              bigint(20)     not null auto_increment comment '问卷主键',
   survey_name            varchar(64)    not null                comment '问卷名称',
   survey_desc            varchar(500)   default null            comment '问卷说明描述',
@@ -112,7 +112,7 @@ create table tb_answer  (
 -- table structure for tb_answer_json
 -- ----------------------------
 drop table if exists tb_answer_json;
-create table tb_answer  (
+create table tb_answer_json  (
   an_id                 bigint(20)             not null  auto_increment        comment '答案主键',
   survey_id             bigint(20)             not null                        comment '问卷主键',
   answer_json           longtext               null                            comment '答案结果，json格式存储',
@@ -121,42 +121,45 @@ create table tb_answer  (
   create_time           datetime                                               comment '创建时间',
   status                char(1)               default '1'                      comment '1：有效，0：无效',
   book_code             char(12)              default ''                       comment '账套',
+  primary key (an_id) using btree
 )engine = innodb auto_increment=100 comment = '问卷答案结果表json' row_format = dynamic;
 
 -- ----------------------------
 -- table structure for tb_table
 -- ----------------------------
-drop table if exists tb_table;
-create table tb_table  (
-  table_id char(32)  null default null comment '主键',
-  question_id char(32)  null default null comment '问题主键',
-  target varchar(500)  null default null comment '表格表头指标',
-  target_type varchar(256)  null default null comment '指标类型，横向：row，纵向：column',
-  create_time char(19)  null default null comment '创建时间',
-  table_sort int(11) null default null comment '排序字段',
-  survey_id char(32)  null default null comment '问卷主键',
-  unique index tb_table_pk(table_id) using btree,
-  index tb_table_question_id_index(question_id) using btree
-) engine = innodb character set = utf8mb4 collate = utf8mb4_general_ci comment = '表格题关系表' row_format = dynamic;
+
+-- drop table if exists tb_table;
+-- create table tb_table  (
+--   table_id char(32)  null default null comment '主键',
+--   question_id char(32)  null default null comment '问题主键',
+--   target varchar(500)  null default null comment '表格表头指标',
+--   target_type varchar(256)  null default null comment '指标类型，横向：row，纵向：column',
+--   create_time char(19)  null default null comment '创建时间',
+--   table_sort int(11) null default null comment '排序字段',
+--   survey_id char(32)  null default null comment '问卷主键',
+--   unique index tb_table_pk(table_id) using btree,
+--   index tb_table_question_id_index(question_id) using btree
+-- ) engine = innodb character set = utf8mb4 collate = utf8mb4_general_ci comment = '表格题关系表' row_format = dynamic;
 
 -- ----------------------------
 -- table structure for tb_table_answer
 -- ----------------------------
-drop table if exists tb_table_answer;
-create table tb_table_answer  (
-  ta_id char(32)  not null comment '主键',
-  survey_id char(32)  null default null comment '问卷主键',
-  question_id char(32)  null default null comment '问题主键',
-  table_row_id varchar(50)  null default null comment '表格行主键',
-  table_column_id varchar(50)  null default null comment '表格列主键',
-  table_value varchar(1000)  null default null comment '结果值',
-  create_time char(19)  null default null comment '创建时间',
-  book_code char(12)  null default null comment '帐套',
-  dcdx_id varchar(50)  null default null comment '调查对象主键',
-  answer_sort int(11) null default null comment '对应排序字段',
-  primary key (ta_id) using btree,
-  index tb_table_answer_question_id_index(question_id) using btree,
-  index inx_table_answer_sort(answer_sort) using btree
-) engine = innodb character set = utf8mb4 collate = utf8mb4_general_ci row_format = dynamic;
+
+-- drop table if exists tb_table_answer;
+-- create table tb_table_answer  (
+--   ta_id char(32)  not null comment '主键',
+--   survey_id char(32)  null default null comment '问卷主键',
+--   question_id char(32)  null default null comment '问题主键',
+--   table_row_id varchar(50)  null default null comment '表格行主键',
+--   table_column_id varchar(50)  null default null comment '表格列主键',
+--   table_value varchar(1000)  null default null comment '结果值',
+--   create_time char(19)  null default null comment '创建时间',
+--   book_code char(12)  null default null comment '帐套',
+--   dcdx_id varchar(50)  null default null comment '调查对象主键',
+--   answer_sort int(11) null default null comment '对应排序字段',
+--   primary key (ta_id) using btree,
+--   index tb_table_answer_question_id_index(question_id) using btree,
+--   index inx_table_answer_sort(answer_sort) using btree
+-- ) engine = innodb character set = utf8mb4 collate = utf8mb4_general_ci row_format = dynamic;
 
 set foreign_key_checks = 1;

@@ -163,6 +163,7 @@ export default {
       getGenTable(tableId).then(res => {
         this.columns = res.data.rows;
         this.info = res.data.info;
+        console.log(res)
         this.tables = res.data.tables;
       });
       /** 查询字典下拉列表 */

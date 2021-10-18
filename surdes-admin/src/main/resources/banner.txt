@@ -1,4 +1,4 @@
-Application Version: ${surdes.version}
+Application Version: ${ruoyi.version}
 Spring Boot Version: ${spring-boot.version}
 ////////////////////////////////////////////////////////////////////
 //                          _ooOoo_                               //

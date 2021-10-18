@@ -1,5 +1,7 @@
 <template>
-	<div></div>
+	<div>
+		回收站
+	</div>
 </template>
 <script>
 export default{

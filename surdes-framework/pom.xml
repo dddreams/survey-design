@@ -59,6 +59,12 @@
             <artifactId>surdes-system</artifactId>
         </dependency>
 
+        <!-- 问卷业务相关模块-->
+        <dependency>
+            <groupId>com.shure.surdes</groupId>
+            <artifactId>surdes-survey</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

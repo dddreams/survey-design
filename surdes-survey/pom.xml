@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>surdes</artifactId>
+        <groupId>com.shure.surdes</groupId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>surdes-survey</artifactId>
+
+    <description>问卷业务相关模块</description>
+
+    <dependencies>
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.shure.surdes</groupId>
+            <artifactId>surdes-common</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
