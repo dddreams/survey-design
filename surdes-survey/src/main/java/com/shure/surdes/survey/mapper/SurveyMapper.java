@@ -60,4 +60,44 @@ public interface SurveyMapper {
      * @return 结果
      */
     public int deleteSurveyBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 批量发布问卷
+     *
+     * @param surveyIds 需要发布的问卷主键集合
+     * @return 结果
+     */
+    public int publishSurveyBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 永久删除问卷
+     *
+     * @param surveyId 问卷主键
+     * @return 结果
+     */
+    public int removeSurveyBySurveyId(Long surveyId);
+
+    /**
+     * 永久删除问卷
+     *
+     * @param surveyIds 问卷主键集合
+     * @return 结果
+     */
+    public int removeSurveyBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 批量还原问卷
+     *
+     * @param surveyIds 需要发布的问卷主键集合
+     * @return 结果
+     */
+    int restoreSurveyBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 撤销发布问卷
+     *
+     * @param surveyId 需要发布的问卷主键
+     * @return 结果
+     */
+    int revokeSurveyBySurveyId(Long surveyId);
 }

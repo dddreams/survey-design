@@ -44,12 +44,6 @@ public class AnswerJson extends BaseEntity {
     private String userName;
 
     /**
-     * 1：有效，0：无效
-     */
-    @Excel(name = "1：有效，0：无效")
-    private String status;
-
-    /**
      * 账套
      */
     @Excel(name = "账套")
@@ -95,14 +89,6 @@ public class AnswerJson extends BaseEntity {
         return userName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setBookCode(String bookCode) {
         this.bookCode = bookCode;
     }
@@ -120,7 +106,6 @@ public class AnswerJson extends BaseEntity {
                 .append("userId", getUserId())
                 .append("userName", getUserName())
                 .append("createTime", getCreateTime())
-                .append("status", getStatus())
                 .append("bookCode", getBookCode())
                 .toString();
     }

@@ -36,10 +36,42 @@ export function updateSurvey(data) {
 }
 
 // 删除问卷
+export function removeSurvey(surveyId) {
+  return request({
+    url: '/survey/survey/remove/' + surveyId,
+    method: 'put'
+  })
+}
+
+// 永久删除问卷
 export function delSurvey(surveyId) {
   return request({
     url: '/survey/survey/' + surveyId,
     method: 'delete'
+  })
+}
+
+// 发布问卷
+export function publishSurvey(surveyId) {
+  return request({
+    url: '/survey/survey/publish/' + surveyId,
+    method: 'put'
+  })
+}
+
+// 撤销发布问卷
+export function revokeSurvey(surveyId) {
+  return request({
+    url: '/survey/survey/revoke/' + surveyId,
+    method: 'put'
+  })
+}
+
+// 还原问卷
+export function restoreSurvey(surveyId) {
+  return request({
+    url: '/survey/survey/restore/' + surveyId,
+    method: 'put'
   })
 }
 

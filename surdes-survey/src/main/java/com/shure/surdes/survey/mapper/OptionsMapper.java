@@ -60,4 +60,20 @@ public interface OptionsMapper {
      * @return 结果
      */
     public int deleteOptionsByOptionIds(Long[] optionIds);
+
+    /**
+     * 根据问卷主键删除选项
+     *
+     * @param surveyIds 问卷主键
+     * @return 结果
+     */
+    int deleteOptionsBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 根据问题主键删除选项
+     *
+     * @param questionId 问题主键
+     * @return 结果
+     */
+    int deleteOptionsByQuestionId(Long questionId);
 }

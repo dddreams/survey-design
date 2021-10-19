@@ -92,12 +92,6 @@ public class Options extends BaseEntity {
     private String isExtend;
 
     /**
-     * 1：有效，0：无效
-     */
-    @Excel(name = "1：有效，0：无效")
-    private String status;
-
-    /**
      * 显示逻辑比较符
      */
     @Excel(name = "显示逻辑比较符")
@@ -219,14 +213,6 @@ public class Options extends BaseEntity {
         return isExtend;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setLogicSymbol(String logicSymbol) {
         this.logicSymbol = logicSymbol;
     }
@@ -268,7 +254,6 @@ public class Options extends BaseEntity {
                 .append("wtqdDesc", getWtqdDesc())
                 .append("isExtend", getIsExtend())
                 .append("createTime", getCreateTime())
-                .append("status", getStatus())
                 .append("logicSymbol", getLogicSymbol())
                 .append("surveyId", getSurveyId())
                 .append("bookCode", getBookCode())

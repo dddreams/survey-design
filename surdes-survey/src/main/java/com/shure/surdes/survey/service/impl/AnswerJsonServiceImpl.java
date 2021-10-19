@@ -43,6 +43,17 @@ public class AnswerJsonServiceImpl implements IAnswerJsonService {
     }
 
     /**
+     * 根据问卷主键查询问卷采集内容
+     *
+     * @param surveyId 问卷ID
+     * @return 问卷答案结果json集合
+     */
+    @Override
+    public List<AnswerJson> answerJsonBySurvey(Long surveyId) {
+        return answerJsonMapper.answerJsonBySurvey(surveyId);
+    }
+
+    /**
      * 新增问卷答案结果json
      *
      * @param answerJson 问卷答案结果json
@@ -85,5 +96,16 @@ public class AnswerJsonServiceImpl implements IAnswerJsonService {
     @Override
     public int deleteAnswerJsonByAnId(Long anId) {
         return answerJsonMapper.deleteAnswerJsonByAnId(anId);
+    }
+
+    /**
+     * 根据问卷主键删除答案结果
+     *
+     * @param surveyIds
+     * @return
+     */
+    @Override
+    public int deleteAnswerJsonBySurveyIds(Long[] surveyIds) {
+        return answerJsonMapper.deleteAnswerJsonBySurveyIds(surveyIds);
     }
 }

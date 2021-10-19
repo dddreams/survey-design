@@ -17,6 +17,38 @@
 set names utf8mb4;
 set foreign_key_checks = 0;
 
+/**
+ * 问卷相关的菜单、字典脚本
+ * **/
+insert into sys_menu values (1073, '问卷管理', 0, 1, 'survey', '', null, 1, 0, 'm', '0', '0', '', 'questionnire', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:23:11', '问卷菜单');
+insert into sys_menu values (1080, '个人问卷', 1073, 1, 'survey', 'surdes/survey/index', null, 1, 0, 'c', '0', '0', 'survey:survey:list', 'questionnire', 'admin', '2021-10-18 17:09:41', 'admin', '2021-10-18 17:24:33', '');
+insert into sys_menu values (1074, '问卷查询', 1080, 1, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:query', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:10:43', '');
+insert into sys_menu values (1075, '问卷新增', 1080, 2, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:add', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:10:52', '');
+insert into sys_menu values (1076, '问卷修改', 1080, 3, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:edit', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:10:59', '');
+insert into sys_menu values (1077, '问卷删除', 1080, 4, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:remove', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:11:08', '');
+insert into sys_menu values (1078, '问卷导出', 1080, 5, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:export', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:11:14', '');
+insert into sys_menu values (1081, '回收站', 1073, 10, 'recycle', 'surdes/recycle/list', null, 1, 0, 'c', '0', '0', 'survey:suevey:query', 'recycle', 'admin', '2021-10-18 17:15:02', '', null, '');
+insert into sys_menu values (1082, '发布', 1080, 6, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:publish', '#', 'admin', '2021-10-19 09:53:47', '', null, '');
+insert into sys_menu values (1083, '设计', 1080, 7, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:design', '#', 'admin', '2021-10-19 10:05:39', '', null, '');
+insert into sys_menu values (1084, '还原', 1081, 1, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:restore', '#', 'admin', '2021-10-19 15:15:39', '', null, '');
+insert into sys_menu values (1085, '永久删除', 1081, 2, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:delete', '#', 'admin', '2021-10-19 15:16:10', '', null, '');
+insert into sys_menu values (1086, '撤销发布', 1080, 8, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:revoke', '#', 'admin', '2021-10-19 15:36:48', '', null, '');
+insert into sys_menu values (1087, '预览', 1080, 9, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:preview', '#', 'admin', '2021-10-19 16:57:57', '', null, '');
+
+
+
+insert into sys_dict_type values (11, '问卷状态', 'survey_status', '0', 'admin', '2021-10-15 22:53:36', 'admin', '2021-10-15 22:57:50', '问卷状态列表');
+insert into sys_dict_type values (12, '问卷类型', 'survey_type', '0', 'admin', '2021-10-15 22:59:20', '', null, '问卷类型');
+
+insert into sys_dict_data values (29, 1, '未发布', '0', 'survey_status', null, 'default', 'n', '0', 'admin', '2021-10-15 22:54:37', '', null, '问卷未发布');
+insert into sys_dict_data values (30, 2, '收集中', '1', 'survey_status', null, 'default', 'n', '0', 'admin', '2021-10-15 22:54:59', '', null, '问卷收集中');
+insert into sys_dict_data values (31, 3, '已结束', '2', 'survey_status', null, 'default', 'n', '0', 'admin', '2021-10-15 22:55:33', '', null, '问卷已结束');
+insert into sys_dict_data values (32, 1, '调查问卷', '01', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:00:18', '', null, '调查问卷');
+insert into sys_dict_data values (33, 2, '考试试卷', '02', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:01:00', '', null, '考试试卷');
+insert into sys_dict_data values (34, 3, '表单', '03', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:01:57', '', null, '登记等表单');
+insert into sys_dict_data values (35, 3, '满意度调查', '03', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:02:46', '', null, '满意度调查');
+
+
 -- ----------------------------
 -- table structure for tb_survey
 -- ----------------------------
@@ -29,7 +61,7 @@ create table tb_survey  (
   survey_status          char(1)        default '0'             comment '问卷状态（0：未发布，1：收集中，2：已结束）',
   create_time            datetime                               comment '创建时间',
   user_id                bigint(20)     default null            comment '创建人',
-  status                 char(1)        default '0'             comment '数据状态（1：有效，0：无效）',
+  status                 char(1)        default '1'             comment '数据状态（1：有效，0：无效）',
   book_code              char(12)       default ''              comment '帐套编码',
   primary key (survey_id)
 ) engine=innodb auto_increment=1 comment = '问卷表';
@@ -48,7 +80,6 @@ create table tb_question  (
   validate_rule         varchar(256)     default ''                    comment '校验规则',
   show_or_hide          char(1)          default '0'                   comment '初始是否隐藏（1：是，0：否）',
   create_time           datetime                                       comment '创建时间',
-  status                char(1)          default '1'                   comment '1：有效，0：无效',
   question_attr         varchar(32)      default null                  comment '题目属性',
   relation_result       varchar(256)     default null                  comment '关联结果字段',
   not_edit              char(1)          default ''                    comment '只读标识 1 为不能编辑',
@@ -80,7 +111,6 @@ create table tb_options  (
   wtqd_desc          varchar(500)        default null                      comment '问题清单描述',
   is_extend          char(1)             default '0'                       comment '是否扩展填空（1：是，0：否）',
   create_time        datetime                                              comment '创建时间',
-  status             char(1)             default '1'                       comment '1：有效，0：无效',
   logic_symbol       varchar(8)          default null                      comment '显示逻辑比较符',
   survey_id          bigint(20)          not null                          comment '问卷主键',
   book_code          char(12)            default ''                        comment '帐套编码',
@@ -103,7 +133,6 @@ create table tb_answer  (
   user_id               varchar(100)           default ''                      comment '答题人唯一标识',
   user_name             varchar(100)           default ''                      comment '答题人姓名',
   create_time           datetime                                               comment '创建时间',
-  status                char(1)               default '1'                      comment '1：有效，0：无效',
   book_code             char(12)              default ''                       comment '账套',
   primary key (answer_id) using btree
 ) engine = innodb auto_increment=1000 comment = '问卷答案结果表' row_format = dynamic;
@@ -119,7 +148,6 @@ create table tb_answer_json  (
   user_id               varchar(100)           default ''                      comment '答题人唯一标识',
   user_name             varchar(100)           default ''                      comment '答题人姓名',
   create_time           datetime                                               comment '创建时间',
-  status                char(1)               default '1'                      comment '1：有效，0：无效',
   book_code             char(12)              default ''                       comment '账套',
   primary key (an_id) using btree
 )engine = innodb auto_increment=100 comment = '问卷答案结果表json' row_format = dynamic;

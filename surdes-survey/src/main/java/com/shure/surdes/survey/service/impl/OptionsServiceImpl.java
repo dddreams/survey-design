@@ -1,12 +1,13 @@
 package com.shure.surdes.survey.service.impl;
 
-import java.util.List;
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.survey.domain.Options;
+import com.shure.surdes.survey.mapper.OptionsMapper;
+import com.shure.surdes.survey.service.IOptionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.shure.surdes.survey.mapper.OptionsMapper;
-import com.shure.surdes.survey.domain.Options;
-import com.shure.surdes.survey.service.IOptionsService;
+
+import java.util.List;
 
 /**
  * 问卷选项Service业务层处理
@@ -15,8 +16,7 @@ import com.shure.surdes.survey.service.IOptionsService;
  * @date 2021-10-18
  */
 @Service
-public class OptionsServiceImpl implements IOptionsService
-{
+public class OptionsServiceImpl implements IOptionsService {
     @Autowired
     private OptionsMapper optionsMapper;
 
@@ -27,8 +27,7 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 问卷选项
      */
     @Override
-    public Options selectOptionsByOptionId(Long optionId)
-    {
+    public Options selectOptionsByOptionId(Long optionId) {
         return optionsMapper.selectOptionsByOptionId(optionId);
     }
 
@@ -39,8 +38,7 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 问卷选项
      */
     @Override
-    public List<Options> selectOptionsList(Options options)
-    {
+    public List<Options> selectOptionsList(Options options) {
         return optionsMapper.selectOptionsList(options);
     }
 
@@ -51,8 +49,7 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 结果
      */
     @Override
-    public int insertOptions(Options options)
-    {
+    public int insertOptions(Options options) {
         options.setCreateTime(DateUtils.getNowDate());
         return optionsMapper.insertOptions(options);
     }
@@ -64,8 +61,7 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 结果
      */
     @Override
-    public int updateOptions(Options options)
-    {
+    public int updateOptions(Options options) {
         return optionsMapper.updateOptions(options);
     }
 
@@ -76,8 +72,7 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 结果
      */
     @Override
-    public int deleteOptionsByOptionIds(Long[] optionIds)
-    {
+    public int deleteOptionsByOptionIds(Long[] optionIds) {
         return optionsMapper.deleteOptionsByOptionIds(optionIds);
     }
 
@@ -88,8 +83,29 @@ public class OptionsServiceImpl implements IOptionsService
      * @return 结果
      */
     @Override
-    public int deleteOptionsByOptionId(Long optionId)
-    {
+    public int deleteOptionsByOptionId(Long optionId) {
         return optionsMapper.deleteOptionsByOptionId(optionId);
+    }
+
+    /**
+     * 根据问卷主键删除选项
+     *
+     * @param surveyIds 问卷主键
+     * @return 结果
+     */
+    @Override
+    public int deleteOptionsBySurveyIds(Long[] surveyIds) {
+        return optionsMapper.deleteOptionsBySurveyIds(surveyIds);
+    }
+
+    /**
+     * 根据问题主键删除选项
+     *
+     * @param questionId 问题主键
+     * @return 结果
+     */
+    @Override
+    public int deleteOptionsByQuestionId(Long questionId) {
+        return optionsMapper.deleteOptionsByQuestionId(questionId);
     }
 }

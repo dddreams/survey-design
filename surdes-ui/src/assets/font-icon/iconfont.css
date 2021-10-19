@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "element-icons";
+  src: url('fonts/iconfont.woff2?t=1634630199847') format('woff2'),
+       url('fonts/iconfont.woff?t=1634630199847') format('woff'),
+       url('fonts/iconfont.ttf?t=1634630199847') format('truetype');
+}
+
+.element-icons {
+  font-family: "element-icons" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.el-icon-revoke:before {
+  content: "\e629";
+}
+
+.el-icon-preview:before {
+  content: "\e636";
+}
+
+

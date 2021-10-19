@@ -1,5 +1,6 @@
-Application Version: ${ruoyi.version}
+Application Version: ${surdes.version}
 Spring Boot Version: ${spring-boot.version}
+RuoYi Version: ${surdes.ruoyi-version}
 ////////////////////////////////////////////////////////////////////
 //                          _ooOoo_                               //
 //                         o8888888o                              //

@@ -62,12 +62,6 @@ public class Question extends BaseEntity {
     private String showOrHide;
 
     /**
-     * 1：有效，0：无效
-     */
-    @Excel(name = "1：有效，0：无效")
-    private String status;
-
-    /**
      * 题目属性
      */
     @Excel(name = "题目属性")
@@ -167,14 +161,6 @@ public class Question extends BaseEntity {
         return showOrHide;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setQuestionAttr(String questionAttr) {
         this.questionAttr = questionAttr;
     }
@@ -235,7 +221,6 @@ public class Question extends BaseEntity {
                 .append("validateRule", getValidateRule())
                 .append("showOrHide", getShowOrHide())
                 .append("createTime", getCreateTime())
-                .append("status", getStatus())
                 .append("questionAttr", getQuestionAttr())
                 .append("relationResult", getRelationResult())
                 .append("notEdit", getNotEdit())

@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shure.surdes.survey.mapper.AnswerMapper">
-    
+
     <resultMap type="Answer" id="AnswerResult">
-        <result property="answerId"    column="answer_id"    />
-        <result property="surveyId"    column="survey_id"    />
-        <result property="questionId"    column="question_id"    />
-        <result property="optionCode"    column="option_code"    />
-        <result property="answerValue"    column="answer_value"    />
-        <result property="extendValue"    column="extend_value"    />
-        <result property="userId"    column="user_id"    />
-        <result property="userName"    column="user_name"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="status"    column="status"    />
-        <result property="bookCode"    column="book_code"    />
+        <result property="answerId" column="answer_id"/>
+        <result property="surveyId" column="survey_id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="optionCode" column="option_code"/>
+        <result property="answerValue" column="answer_value"/>
+        <result property="extendValue" column="extend_value"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="bookCode" column="book_code"/>
     </resultMap>
 
     <sql id="selectAnswerVo">
-        select answer_id, survey_id, question_id, option_code, answer_value, extend_value, user_id, user_name, create_time, status, book_code from tb_answer
+        select answer_id,
+               survey_id,
+               question_id,
+               option_code,
+               answer_value,
+               extend_value,
+               user_id,
+               user_name,
+               create_time,
+               book_code
+        from tb_answer
     </sql>
 
     <select id="selectAnswerList" parameterType="Answer" resultMap="AnswerResult">
         <include refid="selectAnswerVo"/>
-        <where>  
-            <if test="surveyId != null "> and survey_id = #{surveyId}</if>
-            <if test="questionId != null "> and question_id = #{questionId}</if>
-            <if test="optionCode != null  and optionCode != ''"> and option_code = #{optionCode}</if>
-            <if test="answerValue != null  and answerValue != ''"> and answer_value = #{answerValue}</if>
-            <if test="extendValue != null  and extendValue != ''"> and extend_value = #{extendValue}</if>
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
-            <if test="bookCode != null  and bookCode != ''"> and book_code = #{bookCode}</if>
+        <where>
+            <if test="surveyId != null ">and survey_id = #{surveyId}</if>
+            <if test="questionId != null ">and question_id = #{questionId}</if>
+            <if test="optionCode != null  and optionCode != ''">and option_code = #{optionCode}</if>
+            <if test="answerValue != null  and answerValue != ''">and answer_value = #{answerValue}</if>
+            <if test="extendValue != null  and extendValue != ''">and extend_value = #{extendValue}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
+            <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
     </select>
-    
+
     <select id="selectAnswerByAnswerId" parameterType="Long" resultMap="AnswerResult">
         <include refid="selectAnswerVo"/>
         where answer_id = #{answerId}
     </select>
-        
+
     <insert id="insertAnswer" parameterType="Answer" useGeneratedKeys="true" keyProperty="answerId">
         insert into tb_answer
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -53,9 +61,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="userName != null">user_name,</if>
             <if test="createTime != null">create_time,</if>
-            <if test="status != null">status,</if>
             <if test="bookCode != null">book_code,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="surveyId != null">#{surveyId},</if>
             <if test="questionId != null">#{questionId},</if>
@@ -65,9 +72,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">#{userId},</if>
             <if test="userName != null">#{userName},</if>
             <if test="createTime != null">#{createTime},</if>
-            <if test="status != null">#{status},</if>
             <if test="bookCode != null">#{bookCode},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateAnswer" parameterType="Answer">
@@ -81,20 +87,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null">user_name = #{userName},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="status != null">status = #{status},</if>
             <if test="bookCode != null">book_code = #{bookCode},</if>
         </trim>
         where answer_id = #{answerId}
     </update>
 
     <delete id="deleteAnswerByAnswerId" parameterType="Long">
-        delete from tb_answer where answer_id = #{answerId}
+        delete
+        from tb_answer
+        where answer_id = #{answerId}
     </delete>
 
     <delete id="deleteAnswerByAnswerIds" parameterType="String">
-        delete from tb_answer where answer_id in 
+        delete from tb_answer where answer_id in
         <foreach item="answerId" collection="array" open="(" separator="," close=")">
             #{answerId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAnswerBySurveyIds" parameterType="String">
+        delete from tb_answer where survey_id in
+        <foreach item="answerId" collection="array" open="(" separator="," close=")">
+            #{surveyId}
         </foreach>
     </delete>
 </mapper>

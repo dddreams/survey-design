@@ -1,12 +1,14 @@
 package com.shure.surdes.survey.service.impl;
 
-import java.util.List;
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.survey.domain.Question;
+import com.shure.surdes.survey.mapper.QuestionMapper;
+import com.shure.surdes.survey.service.IOptionsService;
+import com.shure.surdes.survey.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.shure.surdes.survey.mapper.QuestionMapper;
-import com.shure.surdes.survey.domain.Question;
-import com.shure.surdes.survey.service.IQuestionService;
+
+import java.util.List;
 
 /**
  * 问卷题目Service业务层处理
@@ -15,10 +17,12 @@ import com.shure.surdes.survey.service.IQuestionService;
  * @date 2021-10-18
  */
 @Service
-public class QuestionServiceImpl implements IQuestionService
-{
+public class QuestionServiceImpl implements IQuestionService {
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private IOptionsService optionsService;
 
     /**
      * 查询问卷题目
@@ -27,8 +31,7 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 问卷题目
      */
     @Override
-    public Question selectQuestionByQuestionId(Long questionId)
-    {
+    public Question selectQuestionByQuestionId(Long questionId) {
         return questionMapper.selectQuestionByQuestionId(questionId);
     }
 
@@ -39,8 +42,7 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 问卷题目
      */
     @Override
-    public List<Question> selectQuestionList(Question question)
-    {
+    public List<Question> selectQuestionList(Question question) {
         return questionMapper.selectQuestionList(question);
     }
 
@@ -51,8 +53,7 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 结果
      */
     @Override
-    public int insertQuestion(Question question)
-    {
+    public int insertQuestion(Question question) {
         question.setCreateTime(DateUtils.getNowDate());
         return questionMapper.insertQuestion(question);
     }
@@ -64,8 +65,7 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 结果
      */
     @Override
-    public int updateQuestion(Question question)
-    {
+    public int updateQuestion(Question question) {
         return questionMapper.updateQuestion(question);
     }
 
@@ -76,8 +76,7 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 结果
      */
     @Override
-    public int deleteQuestionByQuestionIds(Long[] questionIds)
-    {
+    public int deleteQuestionByQuestionIds(Long[] questionIds) {
         return questionMapper.deleteQuestionByQuestionIds(questionIds);
     }
 
@@ -88,8 +87,20 @@ public class QuestionServiceImpl implements IQuestionService
      * @return 结果
      */
     @Override
-    public int deleteQuestionByQuestionId(Long questionId)
-    {
+    public int deleteQuestionByQuestionId(Long questionId) {
+        optionsService.deleteOptionsByQuestionId(questionId);
         return questionMapper.deleteQuestionByQuestionId(questionId);
+    }
+
+    /**
+     * 根据问卷主键删除问题
+     *
+     * @param surveyIds
+     * @return
+     */
+    @Override
+    public int deleteQuestionBySurveyIds(Long[] surveyIds) {
+        optionsService.deleteOptionsBySurveyIds(surveyIds);
+        return questionMapper.deleteQuestionBySurveyIds(surveyIds);
     }
 }

@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shure.surdes.survey.mapper.OptionsMapper">
-    
+
     <resultMap type="Options" id="OptionsResult">
-        <result property="optionId"    column="option_id"    />
-        <result property="questionId"    column="question_id"    />
-        <result property="optionCode"    column="option_code"    />
-        <result property="optionText"    column="option_text"    />
-        <result property="optionNo"    column="option_no"    />
-        <result property="hideQuestion"    column="hide_question"    />
-        <result property="showQuestion"    column="show_question"    />
-        <result property="isWtqd"    column="is_wtqd"    />
-        <result property="wtqdType"    column="wtqd_type"    />
-        <result property="wtqdValue"    column="wtqd_value"    />
-        <result property="wtqdSymbol"    column="wtqd_symbol"    />
-        <result property="wtqdDesc"    column="wtqd_desc"    />
-        <result property="isExtend"    column="is_extend"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="status"    column="status"    />
-        <result property="logicSymbol"    column="logic_symbol"    />
-        <result property="surveyId"    column="survey_id"    />
-        <result property="bookCode"    column="book_code"    />
+        <result property="optionId" column="option_id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="optionCode" column="option_code"/>
+        <result property="optionText" column="option_text"/>
+        <result property="optionNo" column="option_no"/>
+        <result property="hideQuestion" column="hide_question"/>
+        <result property="showQuestion" column="show_question"/>
+        <result property="isWtqd" column="is_wtqd"/>
+        <result property="wtqdType" column="wtqd_type"/>
+        <result property="wtqdValue" column="wtqd_value"/>
+        <result property="wtqdSymbol" column="wtqd_symbol"/>
+        <result property="wtqdDesc" column="wtqd_desc"/>
+        <result property="isExtend" column="is_extend"/>
+        <result property="createTime" column="create_time"/>
+        <result property="logicSymbol" column="logic_symbol"/>
+        <result property="surveyId" column="survey_id"/>
+        <result property="bookCode" column="book_code"/>
     </resultMap>
 
     <sql id="selectOptionsVo">
-        select option_id, question_id, option_code, option_text, option_no, hide_question, show_question, is_wtqd, wtqd_type, wtqd_value, wtqd_symbol, wtqd_desc, is_extend, create_time, status, logic_symbol, survey_id, book_code from tb_options
+        select option_id,
+               question_id,
+               option_code,
+               option_text,
+               option_no,
+               hide_question,
+               show_question,
+               is_wtqd,
+               wtqd_type,
+               wtqd_value,
+               wtqd_symbol,
+               wtqd_desc,
+               is_extend,
+               create_time,
+               logic_symbol,
+               survey_id,
+               book_code
+        from tb_options
     </sql>
 
     <select id="selectOptionsList" parameterType="Options" resultMap="OptionsResult">
         <include refid="selectOptionsVo"/>
-        <where>  
-            <if test="questionId != null "> and question_id = #{questionId}</if>
-            <if test="optionCode != null  and optionCode != ''"> and option_code = #{optionCode}</if>
-            <if test="optionText != null  and optionText != ''"> and option_text = #{optionText}</if>
-            <if test="optionNo != null "> and option_no = #{optionNo}</if>
-            <if test="hideQuestion != null  and hideQuestion != ''"> and hide_question = #{hideQuestion}</if>
-            <if test="showQuestion != null  and showQuestion != ''"> and show_question = #{showQuestion}</if>
-            <if test="isWtqd != null  and isWtqd != ''"> and is_wtqd = #{isWtqd}</if>
-            <if test="wtqdType != null  and wtqdType != ''"> and wtqd_type = #{wtqdType}</if>
-            <if test="wtqdValue != null  and wtqdValue != ''"> and wtqd_value = #{wtqdValue}</if>
-            <if test="wtqdSymbol != null  and wtqdSymbol != ''"> and wtqd_symbol = #{wtqdSymbol}</if>
-            <if test="wtqdDesc != null  and wtqdDesc != ''"> and wtqd_desc = #{wtqdDesc}</if>
-            <if test="isExtend != null  and isExtend != ''"> and is_extend = #{isExtend}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
-            <if test="logicSymbol != null  and logicSymbol != ''"> and logic_symbol = #{logicSymbol}</if>
-            <if test="surveyId != null "> and survey_id = #{surveyId}</if>
-            <if test="bookCode != null  and bookCode != ''"> and book_code = #{bookCode}</if>
+        <where>
+            <if test="questionId != null ">and question_id = #{questionId}</if>
+            <if test="optionCode != null  and optionCode != ''">and option_code = #{optionCode}</if>
+            <if test="optionText != null  and optionText != ''">and option_text = #{optionText}</if>
+            <if test="optionNo != null ">and option_no = #{optionNo}</if>
+            <if test="hideQuestion != null  and hideQuestion != ''">and hide_question = #{hideQuestion}</if>
+            <if test="showQuestion != null  and showQuestion != ''">and show_question = #{showQuestion}</if>
+            <if test="isWtqd != null  and isWtqd != ''">and is_wtqd = #{isWtqd}</if>
+            <if test="wtqdType != null  and wtqdType != ''">and wtqd_type = #{wtqdType}</if>
+            <if test="wtqdValue != null  and wtqdValue != ''">and wtqd_value = #{wtqdValue}</if>
+            <if test="wtqdSymbol != null  and wtqdSymbol != ''">and wtqd_symbol = #{wtqdSymbol}</if>
+            <if test="wtqdDesc != null  and wtqdDesc != ''">and wtqd_desc = #{wtqdDesc}</if>
+            <if test="isExtend != null  and isExtend != ''">and is_extend = #{isExtend}</if>
+            <if test="logicSymbol != null  and logicSymbol != ''">and logic_symbol = #{logicSymbol}</if>
+            <if test="surveyId != null ">and survey_id = #{surveyId}</if>
+            <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
     </select>
-    
+
     <select id="selectOptionsByOptionId" parameterType="Long" resultMap="OptionsResult">
         <include refid="selectOptionsVo"/>
         where option_id = #{optionId}
     </select>
-        
+
     <insert id="insertOptions" parameterType="Options" useGeneratedKeys="true" keyProperty="optionId">
         insert into tb_options
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -72,11 +87,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="wtqdDesc != null">wtqd_desc,</if>
             <if test="isExtend != null">is_extend,</if>
             <if test="createTime != null">create_time,</if>
-            <if test="status != null">status,</if>
             <if test="logicSymbol != null">logic_symbol,</if>
             <if test="surveyId != null">survey_id,</if>
             <if test="bookCode != null">book_code,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="questionId != null">#{questionId},</if>
             <if test="optionCode != null and optionCode != ''">#{optionCode},</if>
@@ -91,11 +105,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="wtqdDesc != null">#{wtqdDesc},</if>
             <if test="isExtend != null">#{isExtend},</if>
             <if test="createTime != null">#{createTime},</if>
-            <if test="status != null">#{status},</if>
             <if test="logicSymbol != null">#{logicSymbol},</if>
             <if test="surveyId != null">#{surveyId},</if>
             <if test="bookCode != null">#{bookCode},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateOptions" parameterType="Options">
@@ -114,7 +127,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="wtqdDesc != null">wtqd_desc = #{wtqdDesc},</if>
             <if test="isExtend != null">is_extend = #{isExtend},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="status != null">status = #{status},</if>
             <if test="logicSymbol != null">logic_symbol = #{logicSymbol},</if>
             <if test="surveyId != null">survey_id = #{surveyId},</if>
             <if test="bookCode != null">book_code = #{bookCode},</if>
@@ -123,13 +135,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteOptionsByOptionId" parameterType="Long">
-        delete from tb_options where option_id = #{optionId}
+        delete
+        from tb_options
+        where option_id = #{optionId}
     </delete>
 
     <delete id="deleteOptionsByOptionIds" parameterType="String">
-        delete from tb_options where option_id in 
+        delete from tb_options where option_id in
         <foreach item="optionId" collection="array" open="(" separator="," close=")">
             #{optionId}
         </foreach>
+    </delete>
+
+    <delete id="deleteOptionsBySurveyIds" parameterType="String">
+        delete from tb_options where survey_id in
+        <foreach item="optionId" collection="array" open="(" separator="," close=")">
+            #{surveyId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteOptionsByQuestionId" parameterType="Long">
+        delete
+        from tb_options
+        where question_id = #{QuestionId}
     </delete>
 </mapper>

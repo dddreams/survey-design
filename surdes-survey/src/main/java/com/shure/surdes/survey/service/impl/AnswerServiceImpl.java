@@ -1,12 +1,13 @@
 package com.shure.surdes.survey.service.impl;
 
-import java.util.List;
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.survey.domain.Answer;
+import com.shure.surdes.survey.mapper.AnswerMapper;
+import com.shure.surdes.survey.service.IAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.shure.surdes.survey.mapper.AnswerMapper;
-import com.shure.surdes.survey.domain.Answer;
-import com.shure.surdes.survey.service.IAnswerService;
+
+import java.util.List;
 
 /**
  * 问卷答案结果Service业务层处理
@@ -15,8 +16,7 @@ import com.shure.surdes.survey.service.IAnswerService;
  * @date 2021-10-18
  */
 @Service
-public class AnswerServiceImpl implements IAnswerService
-{
+public class AnswerServiceImpl implements IAnswerService {
     @Autowired
     private AnswerMapper answerMapper;
 
@@ -27,8 +27,7 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 问卷答案结果
      */
     @Override
-    public Answer selectAnswerByAnswerId(Long answerId)
-    {
+    public Answer selectAnswerByAnswerId(Long answerId) {
         return answerMapper.selectAnswerByAnswerId(answerId);
     }
 
@@ -39,8 +38,7 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 问卷答案结果
      */
     @Override
-    public List<Answer> selectAnswerList(Answer answer)
-    {
+    public List<Answer> selectAnswerList(Answer answer) {
         return answerMapper.selectAnswerList(answer);
     }
 
@@ -51,8 +49,7 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 结果
      */
     @Override
-    public int insertAnswer(Answer answer)
-    {
+    public int insertAnswer(Answer answer) {
         answer.setCreateTime(DateUtils.getNowDate());
         return answerMapper.insertAnswer(answer);
     }
@@ -64,8 +61,7 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 结果
      */
     @Override
-    public int updateAnswer(Answer answer)
-    {
+    public int updateAnswer(Answer answer) {
         return answerMapper.updateAnswer(answer);
     }
 
@@ -76,8 +72,7 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 结果
      */
     @Override
-    public int deleteAnswerByAnswerIds(Long[] answerIds)
-    {
+    public int deleteAnswerByAnswerIds(Long[] answerIds) {
         return answerMapper.deleteAnswerByAnswerIds(answerIds);
     }
 
@@ -88,8 +83,18 @@ public class AnswerServiceImpl implements IAnswerService
      * @return 结果
      */
     @Override
-    public int deleteAnswerByAnswerId(Long answerId)
-    {
+    public int deleteAnswerByAnswerId(Long answerId) {
         return answerMapper.deleteAnswerByAnswerId(answerId);
+    }
+
+    /**
+     * 根据问卷主键删除结果
+     *
+     * @param surveyIds
+     * @return
+     */
+    @Override
+    public int deleteAnswerBySurveyIds(Long[] surveyIds) {
+        return answerMapper.deleteAnswerBySurveyIds(surveyIds);
     }
 }

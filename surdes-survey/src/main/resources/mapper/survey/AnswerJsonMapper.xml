@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shure.surdes.survey.mapper.AnswerJsonMapper">
-    
+
     <resultMap type="AnswerJson" id="AnswerJsonResult">
-        <result property="anId"    column="an_id"    />
-        <result property="surveyId"    column="survey_id"    />
-        <result property="answerJson"    column="answer_json"    />
-        <result property="userId"    column="user_id"    />
-        <result property="userName"    column="user_name"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="status"    column="status"    />
-        <result property="bookCode"    column="book_code"    />
+        <result property="anId" column="an_id"/>
+        <result property="surveyId" column="survey_id"/>
+        <result property="answerJson" column="answer_json"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="bookCode" column="book_code"/>
     </resultMap>
 
     <sql id="selectAnswerJsonVo">
-        select an_id, survey_id, answer_json, user_id, user_name, create_time, status, book_code from tb_answer_json
+        select an_id, survey_id, answer_json, user_id, user_name, create_time, book_code
+        from tb_answer_json
     </sql>
 
     <select id="selectAnswerJsonList" parameterType="AnswerJson" resultMap="AnswerJsonResult">
         <include refid="selectAnswerJsonVo"/>
-        <where>  
-            <if test="surveyId != null "> and survey_id = #{surveyId}</if>
-            <if test="answerJson != null  and answerJson != ''"> and answer_json = #{answerJson}</if>
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
-            <if test="bookCode != null  and bookCode != ''"> and book_code = #{bookCode}</if>
+        <where>
+            <if test="surveyId != null ">and survey_id = #{surveyId}</if>
+            <if test="answerJson != null  and answerJson != ''">and answer_json = #{answerJson}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
+            <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
     </select>
-    
+
     <select id="selectAnswerJsonByAnId" parameterType="Long" resultMap="AnswerJsonResult">
         <include refid="selectAnswerJsonVo"/>
         where an_id = #{anId}
     </select>
-        
+
     <insert id="insertAnswerJson" parameterType="AnswerJson" useGeneratedKeys="true" keyProperty="anId">
         insert into tb_answer_json
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -44,18 +43,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id,</if>
             <if test="userName != null">user_name,</if>
             <if test="createTime != null">create_time,</if>
-            <if test="status != null">status,</if>
             <if test="bookCode != null">book_code,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="surveyId != null">#{surveyId},</if>
             <if test="answerJson != null">#{answerJson},</if>
             <if test="userId != null">#{userId},</if>
             <if test="userName != null">#{userName},</if>
             <if test="createTime != null">#{createTime},</if>
-            <if test="status != null">#{status},</if>
             <if test="bookCode != null">#{bookCode},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateAnswerJson" parameterType="AnswerJson">
@@ -66,20 +63,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null">user_name = #{userName},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="status != null">status = #{status},</if>
             <if test="bookCode != null">book_code = #{bookCode},</if>
         </trim>
         where an_id = #{anId}
     </update>
 
     <delete id="deleteAnswerJsonByAnId" parameterType="Long">
-        delete from tb_answer_json where an_id = #{anId}
+        delete
+        from tb_answer_json
+        where an_id = #{anId}
     </delete>
 
     <delete id="deleteAnswerJsonByAnIds" parameterType="String">
-        delete from tb_answer_json where an_id in 
+        delete from tb_answer_json where an_id in
         <foreach item="anId" collection="array" open="(" separator="," close=")">
             #{anId}
+        </foreach>
+    </delete>
+
+    <select id="answerJsonBySurvey" parameterType="Long" resultMap="AnswerJsonResult">
+        <include refid="selectAnswerJsonVo"/>
+        where survey_id = #{surveyId}
+    </select>
+
+    <delete id="deleteAnswerJsonBySurveyIds" parameterType="String">
+        delete from tb_answer_json where survey_id in
+        <foreach item="anId" collection="array" open="(" separator="," close=")">
+            #{surveyId}
         </foreach>
     </delete>
 </mapper>

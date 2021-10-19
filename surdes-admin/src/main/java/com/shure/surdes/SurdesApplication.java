@@ -13,6 +13,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class SurdesApplication {
     public static void main(String[] args) {
         SpringApplication.run(SurdesApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  启动成功   ლ(´ڡ`ლ)ﾞ  \n");
+        System.out.println("(♥◠‿◠)ﾉﾞ  启动成功啦   ლ(´ڡ`ლ)ﾞ  \n");
     }
 }

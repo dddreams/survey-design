@@ -1,12 +1,13 @@
 package com.shure.surdes.survey.service.impl;
 
-import java.util.List;
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.survey.domain.Survey;
+import com.shure.surdes.survey.mapper.SurveyMapper;
+import com.shure.surdes.survey.service.ISurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.shure.surdes.survey.mapper.SurveyMapper;
-import com.shure.surdes.survey.domain.Survey;
-import com.shure.surdes.survey.service.ISurveyService;
+
+import java.util.List;
 
 /**
  * 问卷Service业务层处理
@@ -15,8 +16,7 @@ import com.shure.surdes.survey.service.ISurveyService;
  * @date 2021-10-18
  */
 @Service
-public class SurveyServiceImpl implements ISurveyService
-{
+public class SurveyServiceImpl implements ISurveyService {
     @Autowired
     private SurveyMapper surveyMapper;
 
@@ -27,8 +27,7 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 问卷
      */
     @Override
-    public Survey selectSurveyBySurveyId(Long surveyId)
-    {
+    public Survey selectSurveyBySurveyId(Long surveyId) {
         return surveyMapper.selectSurveyBySurveyId(surveyId);
     }
 
@@ -39,8 +38,7 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 问卷
      */
     @Override
-    public List<Survey> selectSurveyList(Survey survey)
-    {
+    public List<Survey> selectSurveyList(Survey survey) {
         return surveyMapper.selectSurveyList(survey);
     }
 
@@ -51,8 +49,7 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 结果
      */
     @Override
-    public int insertSurvey(Survey survey)
-    {
+    public int insertSurvey(Survey survey) {
         survey.setCreateTime(DateUtils.getNowDate());
         return surveyMapper.insertSurvey(survey);
     }
@@ -64,9 +61,30 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 结果
      */
     @Override
-    public int updateSurvey(Survey survey)
-    {
+    public int updateSurvey(Survey survey) {
         return surveyMapper.updateSurvey(survey);
+    }
+
+    /**
+     * 批量永久删除问卷
+     *
+     * @param surveyIds 需要永久删除的问卷主键
+     * @return 结果
+     */
+    @Override
+    public int deleteSurveyBySurveyIds(Long[] surveyIds) {
+        return surveyMapper.deleteSurveyBySurveyIds(surveyIds);
+    }
+
+    /**
+     * 永久删除问卷信息
+     *
+     * @param surveyId 问卷主键
+     * @return 结果
+     */
+    @Override
+    public int deleteSurveyBySurveyId(Long surveyId) {
+        return surveyMapper.deleteSurveyBySurveyId(surveyId);
     }
 
     /**
@@ -76,9 +94,8 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 结果
      */
     @Override
-    public int deleteSurveyBySurveyIds(Long[] surveyIds)
-    {
-        return surveyMapper.deleteSurveyBySurveyIds(surveyIds);
+    public int removeSurveyBySurveyIds(Long[] surveyIds) {
+        return surveyMapper.removeSurveyBySurveyIds(surveyIds);
     }
 
     /**
@@ -88,8 +105,40 @@ public class SurveyServiceImpl implements ISurveyService
      * @return 结果
      */
     @Override
-    public int deleteSurveyBySurveyId(Long surveyId)
-    {
-        return surveyMapper.deleteSurveyBySurveyId(surveyId);
+    public int removeSurveyBySurveyId(Long surveyId) {
+        return surveyMapper.removeSurveyBySurveyId(surveyId);
+    }
+
+    /**
+     * 批量发布问卷
+     *
+     * @param surveyIds 需要发布的问卷主键集合
+     * @return 结果
+     */
+    @Override
+    public int publishSurveyBySurveyIds(Long[] surveyIds) {
+        return surveyMapper.publishSurveyBySurveyIds(surveyIds);
+    }
+
+    /**
+     * 批量还原问卷
+     *
+     * @param surveyIds 需要发布的问卷主键集合
+     * @return 结果
+     */
+    @Override
+    public int restoreSurveyBySurveyIds(Long[] surveyIds) {
+        return surveyMapper.restoreSurveyBySurveyIds(surveyIds);
+    }
+
+    /**
+     * 撤销发布问卷
+     *
+     * @param surveyId 需要发布的问卷主键
+     * @return 结果
+     */
+    @Override
+    public int revokeSurveyBySurveyId(Long surveyId) {
+        return surveyMapper.revokeSurveyBySurveyId(surveyId);
     }
 }

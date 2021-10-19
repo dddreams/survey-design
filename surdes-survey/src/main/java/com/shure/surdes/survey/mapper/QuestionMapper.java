@@ -60,4 +60,12 @@ public interface QuestionMapper {
      * @return 结果
      */
     public int deleteQuestionByQuestionIds(Long[] questionIds);
+
+    /**
+     * 根据问卷主键删除问题
+     *
+     * @param surveyIds
+     * @return
+     */
+    public int deleteQuestionBySurveyIds(Long[] surveyIds);
 }

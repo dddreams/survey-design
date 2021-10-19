@@ -60,4 +60,20 @@ public interface AnswerJsonMapper {
      * @return 结果
      */
     public int deleteAnswerJsonByAnIds(Long[] anIds);
+
+    /**
+     * 根据问卷主键查询问卷采集内容
+     *
+     * @param surveyId 问卷ID
+     * @return 问卷答案结果json集合
+     */
+    List<AnswerJson> answerJsonBySurvey(Long surveyId);
+
+    /**
+     * 根据问卷主键删除答案结果
+     *
+     * @param surveyIds
+     * @return
+     */
+    int deleteAnswerJsonBySurveyIds(Long[] surveyIds);
 }
