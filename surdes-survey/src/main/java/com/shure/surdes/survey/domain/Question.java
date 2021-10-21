@@ -5,6 +5,8 @@ import com.shure.surdes.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.List;
+
 /**
  * 问卷题目对象 tb_question
  *
@@ -96,6 +98,16 @@ public class Question extends BaseEntity {
      */
     @Excel(name = "账套")
     private String bookCode;
+
+    /**
+     * 题目选项列表
+     */
+    private List<Options> options;
+
+    /**
+     * 题目结果
+     */
+    private Answer answer;
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
@@ -207,6 +219,22 @@ public class Question extends BaseEntity {
 
     public String getBookCode() {
         return bookCode;
+    }
+
+    public List<Options> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Options> options) {
+        this.options = options;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     @Override

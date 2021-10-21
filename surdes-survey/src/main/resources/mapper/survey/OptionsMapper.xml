@@ -64,6 +64,7 @@
             <if test="surveyId != null ">and survey_id = #{surveyId}</if>
             <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
+        order by option_no
     </select>
 
     <select id="selectOptionsByOptionId" parameterType="Long" resultMap="OptionsResult">

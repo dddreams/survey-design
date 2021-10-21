@@ -38,6 +38,16 @@ public class QuestionController extends BaseController {
     }
 
     /**
+     * 根据问卷主键查询问卷题目列表
+     */
+    @PreAuthorize("@ss.hasPermi('survey:question:list')")
+    @GetMapping("/list/{surveyId}")
+    public AjaxResult list(@PathVariable("surveyId") Long surveyId) {
+        List<Question> list = questionService.selectQuestionListBySurveyId(surveyId);
+        return AjaxResult.success(list);
+    }
+
+    /**
      * 导出问卷题目列表
      */
     @PreAuthorize("@ss.hasPermi('survey:question:export')")

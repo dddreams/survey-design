@@ -28,6 +28,14 @@ public interface IQuestionService {
     public List<Question> selectQuestionList(Question question);
 
     /**
+     * 根据问卷主键查询问卷题目列表
+     *
+     * @param surveyId 问卷主键
+     * @return 问卷题目集合
+     */
+    public List<Question> selectQuestionListBySurveyId(Long surveyId);
+
+    /**
      * 新增问卷题目
      *
      * @param question 问卷题目
@@ -67,4 +75,6 @@ public interface IQuestionService {
      * @return
      */
     public int deleteQuestionBySurveyIds(Long[] surveyIds);
+
+
 }

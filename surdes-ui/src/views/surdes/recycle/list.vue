@@ -74,7 +74,7 @@
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-preview"
+            icon="el-icon-preview2"
             @click="handlePreview(scope.row)"
             v-hasPermi="['survey:survey:preview']"
           >预览</el-button>

@@ -58,6 +58,7 @@
             <if test="formula != null  and formula != ''">and formula = #{formula}</if>
             <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
+        order by question_sort
     </select>
 
     <select id="selectQuestionByQuestionId" parameterType="Long" resultMap="QuestionResult">

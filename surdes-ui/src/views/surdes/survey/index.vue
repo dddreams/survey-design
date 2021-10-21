@@ -108,13 +108,13 @@
             type="text"
             icon="el-icon-edit-outline"
             @click="handleDesign(scope.row)"
-            v-hasPermi="['survey:survey:design']"
+            v-hasPermi="['survey:question:list']"
             v-if="scope.row.surveyStatus == '0'"
           >设计</el-button>
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-preview"
+            icon="el-icon-preview2"
             @click="handlePreview(scope.row)"
             v-hasPermi="['survey:survey:preview']"
           >预览</el-button>

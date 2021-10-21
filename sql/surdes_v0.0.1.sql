@@ -29,7 +29,7 @@ insert into sys_menu values (1077, '问卷删除', 1080, 4, '#', '', null, 1, 0,
 insert into sys_menu values (1078, '问卷导出', 1080, 5, '#', '', null, 1, 0, 'f', '0', '0', 'survey:survey:export', '#', 'admin', '2021-10-18 17:00:27', 'admin', '2021-10-18 17:11:14', '');
 insert into sys_menu values (1081, '回收站', 1073, 10, 'recycle', 'surdes/recycle/list', null, 1, 0, 'c', '0', '0', 'survey:suevey:query', 'recycle', 'admin', '2021-10-18 17:15:02', '', null, '');
 insert into sys_menu values (1082, '发布', 1080, 6, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:publish', '#', 'admin', '2021-10-19 09:53:47', '', null, '');
-insert into sys_menu values (1083, '设计', 1080, 7, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:design', '#', 'admin', '2021-10-19 10:05:39', '', null, '');
+insert into sys_menu values (1083, '设计', 1080, 7, '', null, null, 1, 0, 'f', '0', '0', 'survey:question:list', '#', 'admin', '2021-10-19 10:05:39', '', null, '');
 insert into sys_menu values (1084, '还原', 1081, 1, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:restore', '#', 'admin', '2021-10-19 15:15:39', '', null, '');
 insert into sys_menu values (1085, '永久删除', 1081, 2, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:delete', '#', 'admin', '2021-10-19 15:16:10', '', null, '');
 insert into sys_menu values (1086, '撤销发布', 1080, 8, '', null, null, 1, 0, 'f', '0', '0', 'survey:survey:revoke', '#', 'admin', '2021-10-19 15:36:48', '', null, '');

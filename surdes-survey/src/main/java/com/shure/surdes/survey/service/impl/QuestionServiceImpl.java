@@ -1,6 +1,7 @@
 package com.shure.surdes.survey.service.impl;
 
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.survey.domain.Options;
 import com.shure.surdes.survey.domain.Question;
 import com.shure.surdes.survey.mapper.QuestionMapper;
 import com.shure.surdes.survey.service.IOptionsService;
@@ -8,6 +9,7 @@ import com.shure.surdes.survey.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +46,35 @@ public class QuestionServiceImpl implements IQuestionService {
     @Override
     public List<Question> selectQuestionList(Question question) {
         return questionMapper.selectQuestionList(question);
+    }
+
+    /**
+     * 根据问卷主键查询问卷题目列表
+     *
+     * @param surveyId 问卷主键
+     * @return 问卷题目集合
+     */
+    @Override
+    public List<Question> selectQuestionListBySurveyId(Long surveyId) {
+        Question question = new Question();
+        question.setSurveyId(surveyId);
+
+        List<Question> questions = questionMapper.selectQuestionList(question);
+        if (!questions.isEmpty()) {
+            Options option = new Options();
+            option.setSurveyId(surveyId);
+            List<Options> options = optionsService.selectOptionsList(option);
+            for (Question q : questions) {
+                List<Options> opts = new ArrayList<>();
+                for (Options o : options) {
+                    if (q.getQuestionId().equals(o.getQuestionId())) {
+                        opts.add(o);
+                    }
+                }
+                q.setOptions(opts);
+            }
+        }
+        return questions;
     }
 
     /**

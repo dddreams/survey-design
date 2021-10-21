@@ -9,6 +9,14 @@ export function listQuestion(query) {
   })
 }
 
+// 根据问卷主键查询问卷题目列表
+export function listBySurveyId(surveyId) {
+  return request({
+    url: '/survey/question/list/' + surveyId,
+    method: 'get',
+  })
+}
+
 // 查询问卷题目详细
 export function getQuestion(questionId) {
   return request({
