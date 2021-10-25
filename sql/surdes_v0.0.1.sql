@@ -39,6 +39,7 @@ insert into sys_menu values (1087, '预览', 1080, 9, '', null, null, 1, 0, 'f',
 
 insert into sys_dict_type values (11, '问卷状态', 'survey_status', '0', 'admin', '2021-10-15 22:53:36', 'admin', '2021-10-15 22:57:50', '问卷状态列表');
 insert into sys_dict_type values (12, '问卷类型', 'survey_type', '0', 'admin', '2021-10-15 22:59:20', '', null, '问卷类型');
+insert into sys_dict_type values (13, '题目类型', 'question_type', '0', 'admin', '2021-10-25 15:24:29', '', null, '题目类型');
 
 insert into sys_dict_data values (29, 1, '未发布', '0', 'survey_status', null, 'default', 'n', '0', 'admin', '2021-10-15 22:54:37', '', null, '问卷未发布');
 insert into sys_dict_data values (30, 2, '收集中', '1', 'survey_status', null, 'default', 'n', '0', 'admin', '2021-10-15 22:54:59', '', null, '问卷收集中');
@@ -47,6 +48,16 @@ insert into sys_dict_data values (32, 1, '调查问卷', '01', 'survey_type', nu
 insert into sys_dict_data values (33, 2, '考试试卷', '02', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:01:00', '', null, '考试试卷');
 insert into sys_dict_data values (34, 3, '表单', '03', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:01:57', '', null, '登记等表单');
 insert into sys_dict_data values (35, 3, '满意度调查', '03', 'survey_type', null, 'default', 'n', '0', 'admin', '2021-10-15 23:02:46', '', null, '满意度调查');
+insert into sys_dict_data values (36, 1, '单行填空', 'input', 'question_type', 'input', 'default', 'n', '0', 'admin', '2021-10-25 15:31:56', '', null, '填空题');
+insert into sys_dict_data values (37, 2, '多行填空', 'textarea', 'question_type', 'textarea', 'default', 'n', '0', 'admin', '2021-10-25 15:32:22', '', null, '填空题');
+insert into sys_dict_data values (38, 3, '单项选择', 'radio', 'question_type', 'ridio', 'default', 'n', '0', 'admin', '2021-10-25 15:33:34', 'admin', '2021-10-25 16:50:53', '选择题');
+insert into sys_dict_data values (39, 4, '多项选择', 'checkbox', 'question_type', 'checkbox', 'default', 'n', '0', 'admin', '2021-10-25 15:33:58', '', null, '选择题');
+insert into sys_dict_data values (40, 5, '下拉选择', 'select', 'question_type', 'select', 'default', 'n', '0', 'admin', '2021-10-25 15:34:19', '', null, '选择题');
+insert into sys_dict_data values (41, 6, '表格题', 'table', 'question_type', 'table', 'default', 'n', '0', 'admin', '2021-10-25 15:36:05', '', null, '复杂题');
+insert into sys_dict_data values (42, 7, '计算题', 'compute', 'question_type', 'jisuan', 'default', 'n', '0', 'admin', '2021-10-25 15:44:24', '', null, '复杂题');
+insert into sys_dict_data values (43, 8, '附件题', 'file', 'question_type', 'file', 'default', 'n', '0', 'admin', '2021-10-25 15:44:46', '', null, '复杂题');
+insert into sys_dict_data values (44, 9, '标题', 'title', 'question_type', 'title', 'default', 'n', '0', 'admin', '2021-10-25 19:42:35', 'admin', '2021-10-25 19:43:36', '文本说明');
+insert into sys_dict_data values (45, 10, '段落说明', 'text', 'question_type', 'text', 'default', 'n', '0', 'admin', '2021-10-25 19:43:25', '', null, '文本说明');
 
 
 -- ----------------------------

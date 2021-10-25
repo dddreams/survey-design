@@ -89,7 +89,7 @@
     <el-table v-loading="loading" :data="surveyList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="问卷名称" align="center" prop="surveyName" />
-      <el-table-column label="问卷说明描述" align="center" prop="surveyDesc" />
+      <el-table-column label="问卷描述" align="center" prop="surveyDesc" />
       <el-table-column label="问卷类型" align="center" prop="surveyType" >
         <template slot-scope="scope">
           <dict-tag :options="dict.type.survey_type" :value="scope.row.surveyType"/>
@@ -324,7 +324,8 @@ export default {
     },
     /** 设计按钮操作 */
     handleDesign(row){
-
+      const surveyId = row.surveyId;
+      this.$router.push({path: '/survey/design',query: { surveyId: surveyId }})
     },
     /** 预览按钮操作 */
     handlePreview(row){

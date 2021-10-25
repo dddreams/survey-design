@@ -150,6 +150,20 @@ export const constantRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen'}
       }
     ]
+  },
+  // 问卷设计
+  {
+    path: '/survey',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'design',
+        component: (resolve) => require(['@/views/surdes/survey/design'], resolve),
+        name: 'SurveyDesign',
+        meta: { title: '问卷设计', activeMenu: '/survey/survey'}
+      }
+    ]
   }
 ]
 

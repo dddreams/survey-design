@@ -13,16 +13,64 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.el-icon-revoke:before {
-  content: "\e629";
+.el-icon-title:before {
+  content: "\e62b";
+}
+
+.el-icon-text:before {
+  content: "\e693";
+}
+
+.el-icon-jisuan:before {
+  content: "\eba0";
+}
+
+.el-icon-table:before {
+  content: "\e63e";
+}
+
+.el-icon-ridio:before {
+  content: "\e62e";
+}
+
+.el-icon-topic1:before {
+  content: "\e606";
+}
+
+.el-icon-file:before {
+  content: "\e85a";
+}
+
+.el-icon-checkbox:before {
+  content: "\e669";
+}
+
+.el-icon-input:before {
+  content: "\e761";
+}
+
+.el-icon-textarea:before {
+  content: "\e619";
+}
+
+.el-icon-select:before {
+  content: "\e6da";
+}
+
+.el-icon-topic:before {
+  content: "\e656";
+}
+
+.el-icon-preview2:before {
+  content: "\e72d";
 }
 
 .el-icon-preview:before {
   content: "\e636";
 }
 
-.el-icon-preview2:before {
-  content: "\e72d";
+.el-icon-revoke:before {
+  content: "\e629";
 }
 
 
