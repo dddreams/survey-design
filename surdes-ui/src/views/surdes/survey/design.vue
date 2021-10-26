@@ -7,7 +7,7 @@
 						<el-tab-pane label="题型" name="first">
 							<ul class="q-type-module" v-for="item in queModule" :kei="item.title">
 								<span class="q-type-title">{{item.title}}</span>
-								<li v-for="sub in item.value" @click="addQuestio(sub.value)"><i :class="`el-icon-${sub.raw.cssClass}`"></i>{{ sub.label }}</li>
+								<li v-for="sub in item.value" @click="addQuestion(sub.value)"><i :class="`el-icon-${sub.raw.cssClass}`"></i>{{ sub.label }}</li>
 							</ul>
 						</el-tab-pane>
 						<el-tab-pane label="大纲" name="second">
@@ -17,14 +17,19 @@
     		</div>
     	</el-col>
 
-    	<el-col :span="19" :xs="24">
+    	<el-col :span="19" :xs="24" style="height: calc(100vh - 89px);overflow-y: auto;">
     		<div class="de-main">
     			<div class="s-box">
     				<h2 class="s-title">{{ survey.surveyName }}</h2>
     				<div class="s-desc">{{ survey.surveyDesc }}</div>
     			</div>
     			<div class="s-quesitions">
-    				<Question v-for="question in questionList" :question="question" :surveyId="surveyId" />
+    				<Question 
+    					v-for="(question, i) in questionList" 
+    					:question="question" 
+    					:surveyId="surveyId" 
+    					:index="i"
+    					@insertQuestion="insertQuestion"/>
     			</div>
     		</div>
     	</el-col>
@@ -35,6 +40,7 @@
 <script>
 import { getSurvey } from "@/api/survey/survey";
 import { listBySurveyId } from "@/api/survey/question";
+import { ArrayUtil } from "@/utils/arrayUtil";
 import Question from '../question/index';
 
 export default{
@@ -48,10 +54,27 @@ export default{
 			surveyId: this.$route.query.surveyId,
 			survey: {},
 			questionList: [],
+			defaultQuestion: {
+				questionId: null,
+				surveyId: this.$route.query.surveyId,
+		    questionNo: null,
+		    questionSort: null,
+		    questionName: '请输入标题',
+		    questionType: 'input',
+		    validateRule: null,
+		    showOrHide: '0',
+		    questionAttr: null,
+		    relationResult: null,
+		    notEdit: '0',
+		    defaultValue: null,
+		    formula: null,
+		    bookCode: null,
+		    options: [],
+		    answer: {
+		    	answerValue: null
+		    }
+			},
 		}
-	},
-	created(){
-		
 	},
 	mounted(){
 		setTimeout(()=>{
@@ -83,6 +106,7 @@ export default{
 		},
 		/** 获取问卷对象 */
 		getSurvey(){
+			console.log(this.surveyId)
       getSurvey(this.surveyId).then(response => {
 	      this.survey = response.data;
       });
@@ -90,30 +114,29 @@ export default{
 		/** 获取问题列表 */
 		getQuestionList(){
 			listBySurveyId(this.surveyId).then(response => {
-				console.log(response)
 				this.questionList = response.data;
 			})
 		},
-		addQuestio(questionType){
-			console.log(questionType)
+		addQuestion(questionType){
 			let question = {
-				questionId: null,
-				surveyId: this.surveyId,
-		    questionNo: null,
-		    questionSort: null,
-		    questionName: null,
-		    questionType: questionType,
-		    validateRule: null,
-		    showOrHide: '0',
-		    questionAttr: null,
-		    relationResult: null,
-		    notEdit: null,
-		    defaultValue: null,
-		    formula: null,
-		    bookCode: null,
-		    options: [],
+				...this.defaultQuestion,
+				questionType: questionType,
 			}
 			this.questionList.push(question);
+			this.updateIndex();
+		},
+		insertQuestion(index){
+			let question = {
+				...this.defaultQuestion,
+			}
+			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
+			this.updateIndex();
+		},
+		updateIndex(){
+			this.questionList.forEach((q, i) => {
+				q.questionSort = i + 1;
+				q.questionNo = i + 1;
+			})
 		},
 		handleClick(tab, event) {
       console.log(tab, event);
@@ -188,4 +211,6 @@ export default{
     border-bottom: 1px solid #eaeaea;
     padding: 6px 0;
   }
+
+
 </style>

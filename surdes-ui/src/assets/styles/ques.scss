@@ -1,0 +1,30 @@
+.s-quesitions{
+	padding: 3rem;
+}
+
+.q-box{
+	padding: 1rem 1rem .1rem 1rem;
+	border: 1px solid #fff;	
+	cursor: pointer;
+	.q-title{
+		word-break: break-word;
+        padding-bottom: 1rem;
+        font-size: .95rem;
+        font-weight: bold;
+	}
+	.q-btn{
+		margin-top: 10px;
+    	text-align: right;
+		opacity: 0;
+	}
+}
+.q-box:hover{
+	background: #FAFAFA;
+	border-color:  #e0e0e0;
+	.q-btn{
+		opacity: 1;
+	}
+}
+.border{ 
+	border: 1px solid #e0e0e0;
+}
