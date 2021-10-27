@@ -5,9 +5,8 @@
 			{{ question.questionName }}
 		</div>
 		<div class="q-option">
-			<el-input v-model="question.answer.answerValue" style="width:80%"></el-input>
+			<el-input v-model="answerValue" style="width:80%"></el-input>
 		</div>
-		
 	</div>
 </template>
 <script>
@@ -21,10 +20,12 @@ export default{
 		}
 	},
 	data(){
-		return {}
+		return {
+			answerValue: '',
+		}
 	},
 	methods: {
-
+		
 	}
 }
 </script>

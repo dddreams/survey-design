@@ -11,7 +11,9 @@
 							</ul>
 						</el-tab-pane>
 						<el-tab-pane label="大纲" name="second">
-							
+							<label :class="`q-label ${q.questionType=='title' ? 'p-l-10' : ''}`" v-for="q in questionList" :key="q.questionNo">
+								{{ q.questionNo }}.{{ q.questionName }}
+							</label>
 						</el-tab-pane>
 					</el-tabs>
     		</div>
@@ -21,7 +23,16 @@
     		<div class="de-main">
     			<div class="s-box">
     				<h2 class="s-title">{{ survey.surveyName }}</h2>
-    				<div class="s-desc">{{ survey.surveyDesc }}</div>
+    				<div class="s-desc">
+    					{{ survey.surveyDesc }}
+    					<el-button
+    						class="q-add"
+				    		type="text"
+				        icon="el-icon-plus"
+				        size="mini"
+				        @click="insertQuestion(-1)"
+				      >新增一题</el-button>
+    				</div>
     			</div>
     			<div class="s-quesitions">
     				<Question 
@@ -128,14 +139,19 @@ export default{
 		insertQuestion(index){
 			let question = {
 				...this.defaultQuestion,
+				questionType: index == -1 ? 'title' : 'input',
 			}
 			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
 			this.updateIndex();
 		},
 		updateIndex(){
+			let j = 1;
 			this.questionList.forEach((q, i) => {
+				if(q.questionType != 'title' && q.questionType != 'text'){
+					q.questionNo = j;
+					j++;
+				}
 				q.questionSort = i + 1;
-				q.questionNo = i + 1;
 			})
 		},
 		handleClick(tab, event) {
@@ -209,7 +225,22 @@ export default{
   .s-desc{
   	text-indent: 2em;
     border-bottom: 1px solid #eaeaea;
-    padding: 6px 0;
+    padding: 6px 20px;
+  }
+  .q-label{
+  	display: block;
+  	font-size: 14px;
+  	font-weight: normal;
+  	padding: 10px 0 0 30px;
+    color: #333;
+    word-break: break-word;
+  }
+  .q-add{
+  	display: none;
+  	float: right;
+  }
+  .s-box:hover .q-add{
+  	display: block;
   }
 
 

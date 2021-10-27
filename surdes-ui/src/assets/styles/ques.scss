@@ -3,9 +3,10 @@
 }
 
 .q-box{
-	padding: 1rem 1rem .1rem 1rem;
+	padding: 1rem;
 	border: 1px solid #fff;	
 	cursor: pointer;
+	position: relative;
 	.q-title{
 		word-break: break-word;
         padding-bottom: 1rem;
@@ -14,17 +15,42 @@
 	}
 	.q-btn{
 		margin-top: 10px;
-    	text-align: right;
 		opacity: 0;
+		position: absolute;
+		right: 10px;
+		top: 5.5rem;
+	}
+	.q-option{
+		padding-bottom: 2rem;
+		h2{
+			font-family: '微软雅黑';
+			text-align: center;
+		}
 	}
 }
-.q-box:hover{
-	background: #FAFAFA;
+.q-box:hover, .border{
+	background: #fafafa;
 	border-color:  #e0e0e0;
 	.q-btn{
 		opacity: 1;
 	}
 }
-.border{ 
-	border: 1px solid #e0e0e0;
+.q-config{
+    background: #fafafa;
+    .topic-title{
+    	font-size: 14px;
+    }
+    .topic-finish{
+    	padding-top: 10px;
+    	.w-btn{
+    		width: 100%;
+    		padding: 8px 0;
+    	}
+    }
 }
+.p-l-10{
+	padding-left: 10px !important;
+}
+.p-l-20{
+	padding-left: 20px !important;;
+} 
