@@ -40,7 +40,11 @@
     					:question="question" 
     					:surveyId="surveyId" 
     					:index="i"
-    					@insertQuestion="insertQuestion"/>
+    					@insertQuestion="insertQuestion"
+    					@copyQuestion="copyQuestion"
+    					@delQuestion="delQuestion"
+    					@upQuestion="upQuestion"
+    					@downQuestion="downQuestion"/>
     			</div>
     		</div>
     	</el-col>
@@ -117,7 +121,6 @@ export default{
 		},
 		/** 获取问卷对象 */
 		getSurvey(){
-			console.log(this.surveyId)
       getSurvey(this.surveyId).then(response => {
 	      this.survey = response.data;
       });
@@ -144,6 +147,44 @@ export default{
 			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
 			this.updateIndex();
 		},
+		copyQuestion(index){
+			const q = this.questionList[index];
+			this.questionList.push({...q,questionId: ''});
+			this.updateIndex();
+		},
+		delQuestion(index){
+			let questionId = this.questionList[index].questionId;
+      if (questionId) {
+      	this.$confirm('确定要删除该题吗?', '确认提醒', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+          this.questionList = ArrayUtil.delete(this.questionList, index);
+        });
+      } else {
+        this.questionList = ArrayUtil.delete(this.questionList, index);
+      }
+      this.updateIndex();
+		},
+		upQuestion(index){
+			if (this.questionList.length == 0 || index === 0) {
+        return;
+      }
+      this.questionList = ArrayUtil.moveUp(this.questionList, index);
+      this.updateIndex();
+		},
+		downQuestion(index){
+			if (this.questionList.length == 0 || index === this.questionList.length - 1) {
+        return;
+      }
+      this.questionList = ArrayUtil.moveDown(this.questionList, index);
+      this.updateIndex();
+		},
 		updateIndex(){
 			let j = 1;
 			this.questionList.forEach((q, i) => {
@@ -155,7 +196,7 @@ export default{
 			})
 		},
 		handleClick(tab, event) {
-      console.log(tab, event);
+      
     }
 	}
 }

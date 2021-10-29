@@ -4,6 +4,7 @@
 
 .q-box{
 	padding: 1rem;
+	padding-bottom: 0;
 	border: 1px solid #fff;	
 	cursor: pointer;
 	position: relative;
@@ -14,14 +15,14 @@
         font-weight: bold;
 	}
 	.q-btn{
-		margin-top: 10px;
-		opacity: 0;
-		position: absolute;
-		right: 10px;
-		top: 5.5rem;
+		height: 35px;
+	    line-height: 35px;
+	    width: 100%;
+    	text-align: right;
+    	opacity: 0;
 	}
 	.q-option{
-		padding-bottom: 2rem;
+		//padding-bottom: 2rem;
 		h2{
 			font-family: '微软雅黑';
 			text-align: center;
@@ -37,6 +38,7 @@
 }
 .q-config{
     background: #fafafa;
+    padding-bottom: 10px;
     .topic-title{
     	font-size: 14px;
     }
