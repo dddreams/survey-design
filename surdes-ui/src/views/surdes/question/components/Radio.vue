@@ -5,11 +5,12 @@
 			{{ question.questionName }}
 		</div>
 		<div class="q-option">
-			<el-radio-group v-model="answerValue">
+			<el-radio-group v-model="answerValue" :class="question.optionDisplay">
 		    <template v-for="(option, index) in question.options">
-		    	<el-radio :label="option.optionText"></el-radio>
-			    <label :key="index" v-if="option.isExtend == '1' && answerValue == option.optionText" >具体为：
-	          <el-input style="width: 20%;margin-right: 5px;"></el-input>
+		    	<el-radio :label="option.optionText" style="margin-bottom: 10px;" :class="question.optionDisplay"></el-radio>
+			    <label v-if="option.isExtend == '1' && answerValue == option.optionText" class="o-extend">
+			    	具体为：
+	          <el-input size="mini" v-model="extendValue" style="width: 20%;margin-right: 5px;"></el-input>
 	        </label>
 		    </template>
 		  </el-radio-group>
@@ -29,7 +30,14 @@ export default{
 	data(){
 		return {
 			answerValue: '',
+			extendValue: ''
 		}
 	},
 }
 </script>
+<style>
+.q-option .el-radio.row{
+	display: block;
+	margin-bottom: 8px;
+}
+</style>

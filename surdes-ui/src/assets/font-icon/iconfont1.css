@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "element-icons"; /* Project id 2878107 */
+  font-family: "element-icons";
   src: url('fonts/iconfont.woff2?t=1634630199847') format('woff2'),
        url('fonts/iconfont.woff?t=1634630199847') format('woff'),
        url('fonts/iconfont.ttf?t=1634630199847') format('truetype');
@@ -11,22 +11,6 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.el-icon-r-add:before {
-  content: "\e6d9";
-}
-
-.el-icon-r-up:before {
-  content: "\e76f";
-}
-
-.el-icon-r-down:before {
-  content: "\e774";
-}
-
-.el-icon-r-del:before {
-  content: "\e6f5";
 }
 
 .el-icon-title:before {
@@ -88,4 +72,5 @@
 .el-icon-revoke:before {
   content: "\e629";
 }
+
 

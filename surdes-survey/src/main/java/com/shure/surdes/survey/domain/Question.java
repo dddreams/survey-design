@@ -94,6 +94,12 @@ public class Question extends BaseEntity {
     private String formula;
 
     /**
+     * 选项显示方向
+     */
+    @Excel(name = "选项显示方向")
+    private String optionDisplay;
+
+    /**
      * 账套
      */
     @Excel(name = "账套")
@@ -221,6 +227,14 @@ public class Question extends BaseEntity {
         return bookCode;
     }
 
+    public String getOptionDisplay() {
+        return optionDisplay;
+    }
+
+    public void setOptionDisplay(String optionDisplay) {
+        this.optionDisplay = optionDisplay;
+    }
+
     public List<Options> getOptions() {
         return options;
     }
@@ -254,6 +268,7 @@ public class Question extends BaseEntity {
                 .append("notEdit", getNotEdit())
                 .append("defaultValue", getDefaultValue())
                 .append("formula", getFormula())
+                .append("optionDisplay", getOptionDisplay())
                 .append("bookCode", getBookCode())
                 .toString();
     }

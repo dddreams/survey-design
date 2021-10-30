@@ -27,6 +27,10 @@
 			font-family: '微软雅黑';
 			text-align: center;
 		}
+		.o-extend{
+			font-size:14px; font-weight:normal;margin-left: 10px;
+			color: #444;
+		}
 	}
 }
 .q-box:hover, .border{
@@ -39,9 +43,34 @@
 .q-config{
     background: #fafafa;
     padding-bottom: 10px;
-    .topic-title{
+    .topic-title, .option-title{
     	font-size: 14px;
+    	margin-top: 8px;
     }
+    .topic-rules{
+    	margin-top: 8px;
+    	label{
+    		font-size: 14px;
+    		font-weight: normal;
+    	}
+    }
+    .topic-option{
+    	.topic-list{
+		    padding: 0;
+		    margin: 0;
+		    .topic-item{
+		        margin-top: 8px;
+		        list-style: none;
+		        i{
+		        	color: #777;
+		        	font-size: 22px;
+		        	margin: 0 3px;
+		        	vertical-align: middle;
+		        }
+		    }
+		}
+    }
+    
     .topic-finish{
     	padding-top: 10px;
     	.w-btn{
@@ -49,6 +78,12 @@
     		padding: 8px 0;
     	}
     }
+}
+.f-w-b{
+	font-weight: bold !important;
+}
+.p-l-5{
+	padding-left: 5px !important;
 }
 .p-l-10{
 	padding-left: 10px !important;

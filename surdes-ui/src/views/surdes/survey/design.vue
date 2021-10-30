@@ -11,15 +11,15 @@
 							</ul>
 						</el-tab-pane>
 						<el-tab-pane label="大纲" name="second">
-							<label :class="`q-label ${q.questionType=='title' ? 'p-l-10' : ''}`" v-for="q in questionList" :key="q.questionNo">
-								{{ q.questionNo }}.{{ q.questionName }}
+							<label :class="`q-label ${q.questionType=='title' ? 'p-l-5 f-w-b' : ''}`" v-for="q in questionList" :key="q.questionNo">
+								<span v-if="q.questionNo != null">{{ q.questionNo }}.</span>{{ q.questionName }}
 							</label>
 						</el-tab-pane>
 					</el-tabs>
     		</div>
     	</el-col>
 
-    	<el-col :span="19" :xs="24" style="height: calc(100vh - 89px);overflow-y: auto;">
+    	<el-col :span="19" :xs="24" class="de-container">
     		<div class="de-main">
     			<div class="s-box">
     				<h2 class="s-title">{{ survey.surveyName }}</h2>
@@ -40,6 +40,7 @@
     					:question="question" 
     					:surveyId="surveyId" 
     					:index="i"
+    					:key="question.questionNo"
     					@insertQuestion="insertQuestion"
     					@copyQuestion="copyQuestion"
     					@delQuestion="delQuestion"
@@ -49,6 +50,7 @@
     		</div>
     	</el-col>
     </el-row>
+    <el-backtop target=".de-container"></el-backtop>
   </div>
 </template>
 
@@ -69,32 +71,12 @@ export default{
 			surveyId: this.$route.query.surveyId,
 			survey: {},
 			questionList: [],
-			defaultQuestion: {
-				questionId: null,
-				surveyId: this.$route.query.surveyId,
-		    questionNo: null,
-		    questionSort: null,
-		    questionName: '请输入标题',
-		    questionType: 'input',
-		    validateRule: null,
-		    showOrHide: '0',
-		    questionAttr: null,
-		    relationResult: null,
-		    notEdit: '0',
-		    defaultValue: null,
-		    formula: null,
-		    bookCode: null,
-		    options: [],
-		    answer: {
-		    	answerValue: null
-		    }
-			},
 		}
 	},
 	mounted(){
 		setTimeout(()=>{
 			this.initQuesType()
-		}, 1000)
+		}, 800)
 		this.getSurvey();
 		this.getQuestionList();
 	},
@@ -133,17 +115,50 @@ export default{
 		},
 		addQuestion(questionType){
 			let question = {
-				...this.defaultQuestion,
-				questionType: questionType,
-			}
+				questionId: null,
+				surveyId: this.surveyId,
+		    questionNo: null,
+		    questionSort: null,
+		    questionName: '请输入标题',
+		    questionType: questionType,
+		    validateRule: null,
+		    showOrHide: '0',
+		    questionAttr: null,
+		    relationResult: null,
+		    notEdit: '0',
+		    defaultValue: null,
+		    formula: null,
+		    optionDisplay: 'column',
+		    bookCode: null,
+		    options: [],
+		    answer: {
+		    	answerValue: null
+		    }
+			};
 			this.questionList.push(question);
 			this.updateIndex();
 		},
 		insertQuestion(index){
 			let question = {
-				...this.defaultQuestion,
-				questionType: index == -1 ? 'title' : 'input',
-			}
+				questionId: null,
+				surveyId: this.surveyId,
+		    questionNo: null,
+		    questionSort: null,
+		    questionName: '请输入标题',
+		    questionType: index == -1 ? 'title' : 'input',
+		    validateRule: null,
+		    showOrHide: '0',
+		    questionAttr: null,
+		    relationResult: null,
+		    notEdit: '0',
+		    defaultValue: null,
+		    formula: null,
+		    bookCode: null,
+		    options: [],
+		    answer: {
+		    	answerValue: null
+		    }
+			};
 			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
 			this.updateIndex();
 		},
@@ -206,6 +221,9 @@ export default{
   .app-container{
   	background: #f0f0f0;
   	padding: 0 10px;
+  }
+  .de-container{
+  	height: calc(100vh - 89px);overflow-y: auto;
   }
   .de-left{
   	background:  #fff;
@@ -272,9 +290,10 @@ export default{
   	display: block;
   	font-size: 14px;
   	font-weight: normal;
-  	padding: 10px 0 0 30px;
+  	padding: 10px 0 0 20px;
     color: #333;
     word-break: break-word;
+    cursor: pointer;
   }
   .q-add{
   	display: none;
