@@ -87,7 +87,7 @@ create table tb_question  (
   question_no           varchar(20)      default null                  comment '题目编号',
   question_sort         int(8)           default '1'                   comment '排序字段',
   question_name         varchar(500)     default ''                    comment '题目名称',
-  question_type         char(2)          default '01'                  comment '题目类型',
+  question_type         varchar(20)      default 'input'               comment '题目类型',
   validate_rule         varchar(256)     default ''                    comment '校验规则',
   show_or_hide          char(1)          default '0'                   comment '初始是否隐藏（1：是，0：否）',
   question_attr         varchar(32)      default null                  comment '题目属性',

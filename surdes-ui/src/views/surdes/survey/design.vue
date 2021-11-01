@@ -41,6 +41,7 @@
     					:surveyId="surveyId" 
     					:index="i"
     					:key="question.questionNo"
+    					@saveQuestion="saveQuestion"
     					@insertQuestion="insertQuestion"
     					@copyQuestion="copyQuestion"
     					@delQuestion="delQuestion"
@@ -137,6 +138,12 @@ export default{
 			};
 			this.questionList.push(question);
 			this.updateIndex();
+		},
+		saveQuestion(question, func){
+			addQuestion(question).then(res => {
+				func(res)
+				console.log(res)
+			})
 		},
 		insertQuestion(index){
 			let question = {

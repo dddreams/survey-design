@@ -63,6 +63,7 @@
 
       <!-- 规则配置 -->
       <div class="topic-rules">
+      	<!-- 题型 -->
       	<template>
           <label>选择题型：</label>
           <el-select v-model="question.questionType" placeholder="请选择题型" size="mini" style="width:20%">
@@ -70,13 +71,32 @@
 				    </el-option>
 				  </el-select>
         </template>
-        
+        <!-- 方向 -->
         <template v-if="questionClass == 's' && question.questionType != 'select'">
         	<label style="margin-left: 10px;">显示方向：</label>
           <el-select v-model="question.optionDisplay" placeholder="请选择方向" size="mini" style="width:20%">
 				    <el-option v-for="dict in dict.type.option_direction" :key="dict.value" :label="dict.label" :value="dict.value">
 				    </el-option>
 				  </el-select>
+        </template>
+				<!-- 默认值 -->
+        <template v-if="questionClass != 't'">
+        	<label style="margin-left: 10px;">默认值：</label>
+        	<template v-if="questionClass == 's' && question.questionType != 'checkbox'">
+        		<el-select v-model="question.defaultValue" placeholder="请选择默认值" clearable size="mini" style="width:20%">
+					    <el-option v-for="(option, oIndex) in question.options" :key="oIndex" :label="option.optionText" :value="option.optionText"></el-option>
+					  </el-select>
+        	</template>
+
+        	<template v-if="question.questionType == 'checkbox'">
+        		<el-select v-model="question.defaultValue" placeholder="请选择默认值" multiple clearable size="mini" style="width:20%">
+					    <el-option v-for="(option, oIndex) in question.options" :key="oIndex" :label="option.optionText" :value="option.optionText"></el-option>
+					  </el-select>
+        	</template>
+
+        	<template v-if="questionClass == 'i'">
+        		<el-input v-model="question.defaultValue" placeholder="请输入默认值" size="mini" style="width: 24%;"></el-input>
+        	</template>
         </template>
       </div>
 
@@ -113,6 +133,7 @@ import Checkbox from './components/Checkbox.vue';
 import Select from './components/Select.vue';
 import QText from './components/Text.vue';
 import { ArrayUtil } from "@/utils/arrayUtil";
+import { addQuestion } from '@/api/survey/question';
 export default{
 	name: 'Question',
 	dicts: ['question_type','option_direction'],
@@ -161,10 +182,14 @@ export default{
 			this.isEdit = true
 		},
 		saveQuestion(){
-			this.isEdit = false
+			this.$emit('delQuestion', this.question, (res)=>{
+				this.isEdit = false
+			})
 		},
 		copyQuestion(){this.$emit('copyQuestion', this.index)},
-		delQuestion(){this.$emit('delQuestion', this.index)},
+		delQuestion(){
+			this.$emit('delQuestion', this.index)
+		},
 		upQuestion(){this.$emit('upQuestion', this.index)},
 		downQuestion(){this.$emit('downQuestion', this.index)},
 		addOption(){

@@ -75,7 +75,8 @@ public class QuestionController extends BaseController {
     @Log(title = "问卷题目", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Question question) {
-        return toAjax(questionService.insertQuestion(question));
+        questionService.insertQuestion(question);
+        return AjaxResult.success(question);
     }
 
     /**
