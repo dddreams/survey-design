@@ -70,6 +70,7 @@
 				    </el-option>
 				  </el-select>
         </template>
+        
         <template v-if="questionClass == 's' && question.questionType != 'select'">
         	<label style="margin-left: 10px;">显示方向：</label>
           <el-select v-model="question.optionDisplay" placeholder="请选择方向" size="mini" style="width:20%">
