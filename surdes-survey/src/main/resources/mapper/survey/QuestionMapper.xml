@@ -184,6 +184,26 @@
     </delete>
 
     <update id="updateQuesiotnNo" parameterType="java.util.List">
-
+        update tb_question
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="question_no =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.questionNo != null">
+                        when id=#{i.questionId} then #{i.questionNo}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="question_sort =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.questionSort != null">
+                        when id=#{i.questionId} then #{i.questionSort}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="i" index="index">
+            id=#{i.questionId}
+        </foreach>
     </update>
 </mapper>

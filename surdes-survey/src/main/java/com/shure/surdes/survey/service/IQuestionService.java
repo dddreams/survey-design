@@ -82,7 +82,7 @@ public interface IQuestionService {
      *
      * @param queNoes
      */
-    public void updateQuesiotnNo(List<Map<Long, Object>> queNoes);
+    public void updateQuesiotnNo(List<Map<String, Object>> queNoes);
 
 
 }

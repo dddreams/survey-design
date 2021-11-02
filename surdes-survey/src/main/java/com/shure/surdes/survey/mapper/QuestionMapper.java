@@ -83,5 +83,5 @@ public interface QuestionMapper {
      *
      * @param queNoes
      */
-    void updateQuesiotnNo(List<Map<Long, Object>> queNoes);
+    void updateQuesiotnNo(List<Map<String, Object>> queNoes);
 }

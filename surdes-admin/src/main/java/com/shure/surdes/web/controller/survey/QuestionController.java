@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 问卷题目Controller
@@ -96,5 +97,16 @@ public class QuestionController extends BaseController {
     @DeleteMapping("/{questionIds}")
     public AjaxResult remove(@PathVariable Long[] questionIds) {
         return toAjax(questionService.deleteQuestionByQuestionIds(questionIds));
+    }
+
+    /**
+     * 更新问题序号和排序
+     */
+    @PreAuthorize("@ss.hasPermi('survey:survey:edit')")
+    @Log(title = "更新问题序号和排序", businessType = BusinessType.UPDATE)
+    @PutMapping("/updateQueNo")
+    public AjaxResult updateQueNo(@RequestParam("queNoes") List<Map<String, Object>> queNoes) {
+        questionService.updateQuesiotnNo(queNoes);
+        return AjaxResult.success();
     }
 }

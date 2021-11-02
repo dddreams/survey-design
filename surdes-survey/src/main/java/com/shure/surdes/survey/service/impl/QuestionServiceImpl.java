@@ -132,7 +132,7 @@ public class QuestionServiceImpl implements IQuestionService {
      * @param queNoes
      */
     @Override
-    public void updateQuesiotnNo(List<Map<Long, Object>> queNoes) {
+    public void updateQuesiotnNo(List<Map<String, Object>> queNoes) {
         questionMapper.updateQuesiotnNo(queNoes);
     }
 }
