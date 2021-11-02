@@ -5,7 +5,7 @@
 <mapper namespace="com.shure.surdes.survey.mapper.QuestionMapper">
 
     <resultMap type="Question" id="QuestionResult">
-        <result property="questionId" column="question_id"/>
+        <id property="questionId" column="question_id"/>
         <result property="surveyId" column="survey_id"/>
         <result property="questionNo" column="question_no"/>
         <result property="questionSort" column="question_sort"/>
@@ -20,25 +20,60 @@
         <result property="defaultValue" column="default_value"/>
         <result property="formula" column="formula"/>
         <result property="bookCode" column="book_code"/>
+        <collection property="options" javaType="java.util.List" resultMap="optionResult"/>
+    </resultMap>
+
+    <resultMap type="Options" id="optionResult">
+        <id property="optionId" column="option_id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="optionCode" column="option_code"/>
+        <result property="optionText" column="option_text"/>
+        <result property="optionNo" column="option_no"/>
+        <result property="hideQuestion" column="hide_question"/>
+        <result property="showQuestion" column="show_question"/>
+        <result property="isWtqd" column="is_wtqd"/>
+        <result property="wtqdType" column="wtqd_type"/>
+        <result property="wtqdValue" column="wtqd_value"/>
+        <result property="wtqdSymbol" column="wtqd_symbol"/>
+        <result property="wtqdDesc" column="wtqd_desc"/>
+        <result property="isExtend" column="is_extend"/>
+        <result property="createTime" column="create_time"/>
+        <result property="logicSymbol" column="logic_symbol"/>
+        <result property="surveyId" column="survey_id"/>
+        <result property="bookCode" column="book_code"/>
     </resultMap>
 
     <sql id="selectQuestionVo">
-        select question_id,
-               survey_id,
-               question_no,
-               question_sort,
-               question_name,
-               question_type,
-               validate_rule,
-               show_or_hide,
-               create_time,
-               question_attr,
-               relation_result,
-               not_edit,
-               default_value,
-               formula,
-               book_code
-        from tb_question
+        select t.question_id,
+               t.survey_id,
+               t.question_no,
+               t.question_sort,
+               t.question_name,
+               t.question_type,
+               t.validate_rule,
+               t.show_or_hide,
+               t.question_attr,
+               t.relation_result,
+               t.not_edit,
+               t.default_value,
+               t.formula,
+               o.option_id,
+               o.question_id,
+               o.option_code,
+               o.option_text,
+               o.option_no,
+               o.hide_question,
+               o.show_question,
+               o.is_wtqd,
+               o.wtqd_type,
+               o.wtqd_value,
+               o.wtqd_symbol,
+               o.wtqd_desc,
+               o.is_extend,
+               o.logic_symbol,
+               o.survey_id
+        from tb_question t
+                 left join tb_options o on t.question_id = o.question_id
     </sql>
 
     <select id="selectQuestionList" parameterType="Question" resultMap="QuestionResult">
@@ -58,12 +93,17 @@
             <if test="formula != null  and formula != ''">and formula = #{formula}</if>
             <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
-        order by question_sort
+        order by t.question_sort
     </select>
 
     <select id="selectQuestionByQuestionId" parameterType="Long" resultMap="QuestionResult">
         <include refid="selectQuestionVo"/>
-        where question_id = #{questionId}
+        where t.question_id = #{questionId}
+    </select>
+
+    <select id="selectQuestionListBySurvey" parameterType="Long" resultMap="QuestionResult">
+        <include refid="selectQuestionVo"/>
+        where t.survey_id = #{surveyId}
     </select>
 
     <insert id="insertQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="questionId">
@@ -142,4 +182,8 @@
             #{surveyId}
         </foreach>
     </delete>
+
+    <update id="updateQuesiotnNo" parameterType="java.util.List">
+
+    </update>
 </mapper>

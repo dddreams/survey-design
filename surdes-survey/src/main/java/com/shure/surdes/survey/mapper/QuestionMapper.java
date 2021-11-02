@@ -4,6 +4,7 @@ import com.shure.surdes.survey.domain.Question;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 问卷题目Mapper接口
@@ -68,4 +69,19 @@ public interface QuestionMapper {
      * @return
      */
     public int deleteQuestionBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 根据问卷主键查询问题列表
+     *
+     * @param surveyId
+     * @return
+     */
+    List<Question> selectQuestionListBySurvey(Long surveyId);
+
+    /**
+     * 批量更新题目序号
+     *
+     * @param queNoes
+     */
+    void updateQuesiotnNo(List<Map<Long, Object>> queNoes);
 }

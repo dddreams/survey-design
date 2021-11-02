@@ -54,6 +54,11 @@ public class OptionsServiceImpl implements IOptionsService {
         return optionsMapper.insertOptions(options);
     }
 
+    @Override
+    public int insertOptionBatch(List<Options> optionsList) {
+        return optionsMapper.insertOptionBatch(optionsList);
+    }
+
     /**
      * 修改问卷选项
      *

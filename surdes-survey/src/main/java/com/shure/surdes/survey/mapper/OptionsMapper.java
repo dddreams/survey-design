@@ -38,6 +38,14 @@ public interface OptionsMapper {
     public int insertOptions(Options options);
 
     /**
+     * 批量新增问卷选项
+     *
+     * @param optionList 问卷选项列表
+     * @return 结果
+     */
+    public int insertOptionBatch(List<Options> optionList);
+
+    /**
      * 修改问卷选项
      *
      * @param options 问卷选项

@@ -3,6 +3,7 @@ package com.shure.surdes.survey.service;
 import com.shure.surdes.survey.domain.Question;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 问卷题目Service接口
@@ -41,7 +42,7 @@ public interface IQuestionService {
      * @param question 问卷题目
      * @return 结果
      */
-    public int insertQuestion(Question question);
+    public Question insertQuestion(Question question);
 
     /**
      * 修改问卷题目
@@ -75,6 +76,13 @@ public interface IQuestionService {
      * @return
      */
     public int deleteQuestionBySurveyIds(Long[] surveyIds);
+
+    /**
+     * 批量更新题目序号
+     *
+     * @param queNoes
+     */
+    public void updateQuesiotnNo(List<Map<Long, Object>> queNoes);
 
 
 }

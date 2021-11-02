@@ -9,8 +9,8 @@ import com.shure.surdes.survey.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 问卷题目Service业务层处理
@@ -56,25 +56,7 @@ public class QuestionServiceImpl implements IQuestionService {
      */
     @Override
     public List<Question> selectQuestionListBySurveyId(Long surveyId) {
-        Question question = new Question();
-        question.setSurveyId(surveyId);
-
-        List<Question> questions = questionMapper.selectQuestionList(question);
-        if (!questions.isEmpty()) {
-            Options option = new Options();
-            option.setSurveyId(surveyId);
-            List<Options> options = optionsService.selectOptionsList(option);
-            for (Question q : questions) {
-                List<Options> opts = new ArrayList<>();
-                for (Options o : options) {
-                    if (q.getQuestionId().equals(o.getQuestionId())) {
-                        opts.add(o);
-                    }
-                }
-                q.setOptions(opts);
-            }
-        }
-        return questions;
+        return questionMapper.selectQuestionListBySurvey(surveyId);
     }
 
     /**
@@ -84,9 +66,18 @@ public class QuestionServiceImpl implements IQuestionService {
      * @return 结果
      */
     @Override
-    public int insertQuestion(Question question) {
+    public Question insertQuestion(Question question) {
         question.setCreateTime(DateUtils.getNowDate());
-        return questionMapper.insertQuestion(question);
+        questionMapper.insertQuestion(question);
+        List<Options> options = question.getOptions();
+        if (!options.isEmpty()) {
+            for (Options o : options) {
+                o.setCreateTime(DateUtils.getNowDate());
+                o.setQuestionId(question.getQuestionId());
+            }
+            optionsService.insertOptionBatch(options);
+        }
+        return question;
     }
 
     /**
@@ -133,5 +124,15 @@ public class QuestionServiceImpl implements IQuestionService {
     public int deleteQuestionBySurveyIds(Long[] surveyIds) {
         optionsService.deleteOptionsBySurveyIds(surveyIds);
         return questionMapper.deleteQuestionBySurveyIds(surveyIds);
+    }
+
+    /**
+     * 批量更新题目序号
+     *
+     * @param queNoes
+     */
+    @Override
+    public void updateQuesiotnNo(List<Map<Long, Object>> queNoes) {
+        questionMapper.updateQuesiotnNo(queNoes);
     }
 }
