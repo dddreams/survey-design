@@ -59,3 +59,12 @@ export function exportQuestion(query) {
     params: query
   })
 }
+
+// 更新问题序号和排序
+export function updateQueNo(data) {
+  return request({
+    url: '/survey/question/updateQueNo',
+    method: 'put',
+    data: data
+  })
+}

@@ -57,7 +57,7 @@
 
 <script>
 import { getSurvey } from "@/api/survey/survey";
-import { listBySurveyId } from "@/api/survey/question";
+import { listBySurveyId, updateQueNo} from "@/api/survey/question";
 import { ArrayUtil } from "@/utils/arrayUtil";
 import Question from '../question/index';
 
@@ -72,6 +72,7 @@ export default{
 			surveyId: this.$route.query.surveyId,
 			survey: {},
 			questionList: [],
+			queNoes: []
 		}
 	},
 	mounted(){
@@ -209,12 +210,23 @@ export default{
 		},
 		updateIndex(){
 			let j = 1;
+			this.queNoes = [];
 			this.questionList.forEach((q, i) => {
 				if(q.questionType != 'title' && q.questionType != 'text'){
 					q.questionNo = j;
 					j++;
 				}
 				q.questionSort = i + 1;
+				this.queNoes.push({
+					questionId: q.questionId,
+					questionNo: q.questionNo,
+					quesitonSort: q.questionSort
+				})
+			})
+		},
+		updateQuestionNo(){
+			updateQueNo(this.queNoes).then(res => {
+				console.log(res)
 			})
 		},
 		handleClick(tab, event) {
@@ -309,6 +321,4 @@ export default{
   .s-box:hover .q-add{
   	display: block;
   }
-
-
 </style>
