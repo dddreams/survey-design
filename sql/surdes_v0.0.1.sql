@@ -111,7 +111,7 @@ drop table if exists tb_options;
 create table tb_options  (
   option_id          bigint(20)          not null auto_increment           comment '选项主键',
   question_id        bigint(20)          not null                          comment '问题主键',
-  option_code        varchar(64)         not null                          comment '选项值',
+  option_code        varchar(64)         null                              comment '选项值',
   option_text        varchar(256)        not null                          comment '选项文本',
   option_no          int(8)              not null                          comment '选项序号',
   hide_question      longtext            null                              comment '逻辑隐藏题',

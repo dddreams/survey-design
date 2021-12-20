@@ -1,6 +1,7 @@
 package com.shure.surdes.survey.service.impl;
 
 import com.shure.surdes.common.utils.DateUtils;
+import com.shure.surdes.common.utils.StringUtils;
 import com.shure.surdes.survey.domain.Options;
 import com.shure.surdes.survey.domain.Question;
 import com.shure.surdes.survey.mapper.QuestionMapper;
@@ -67,10 +68,16 @@ public class QuestionServiceImpl implements IQuestionService {
      */
     @Override
     public Question insertQuestion(Question question) {
-        question.setCreateTime(DateUtils.getNowDate());
-        questionMapper.insertQuestion(question);
+        if (StringUtils.isNotNull(question.getQuestionId())) {
+            question.setUpdateTime(DateUtils.getNowDate());
+            questionMapper.updateQuestion(question);
+        } else {
+            question.setCreateTime(DateUtils.getNowDate());
+            questionMapper.insertQuestion(question);
+        }
         List<Options> options = question.getOptions();
         if (!options.isEmpty()) {
+            optionsService.deleteOptionsByQuestionId(question.getQuestionId());
             for (Options o : options) {
                 o.setCreateTime(DateUtils.getNowDate());
                 o.setQuestionId(question.getQuestionId());

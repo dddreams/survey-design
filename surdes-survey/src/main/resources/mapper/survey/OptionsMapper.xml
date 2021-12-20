@@ -114,42 +114,12 @@
 
     <insert id="insertOptionBatch" parameterType="java.util.List">
         insert into tb_options
-        <foreach collection="list" item="item" index="index" separator=",">
+        (question_id,option_code,option_text,option_no,hide_question,show_question,is_wtqd,wtqd_type,wtqd_value,wtqd_symbol,wtqd_desc,is_extend,create_time,logic_symbol,survey_id,book_code)
+        values
+        <foreach collection="optionList" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="item.questionId != null">question_id,</if>
-                <if test="item.optionCode != null and optionCode != ''">option_code,</if>
-                <if test="item.optionText != null and optionText != ''">option_text,</if>
-                <if test="item.optionNo != null">option_no,</if>
-                <if test="item.hideQuestion != null">hide_question,</if>
-                <if test="item.showQuestion != null">show_question,</if>
-                <if test="item.isWtqd != null">is_wtqd,</if>
-                <if test="item.wtqdType != null">wtqd_type,</if>
-                <if test="item.wtqdValue != null">wtqd_value,</if>
-                <if test="item.wtqdSymbol != null">wtqd_symbol,</if>
-                <if test="item.wtqdDesc != null">wtqd_desc,</if>
-                <if test="item.isExtend != null">is_extend,</if>
-                <if test="item.createTime != null">create_time,</if>
-                <if test="item.logicSymbol != null">logic_symbol,</if>
-                <if test="item.surveyId != null">survey_id,</if>
-                <if test="item.bookCode != null">book_code,</if>
-            </trim>
-            <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="item.questionId != null">#{questionId},</if>
-                <if test="item.optionCode != null and optionCode != ''">#{optionCode},</if>
-                <if test="item.optionText != null and optionText != ''">#{optionText},</if>
-                <if test="item.optionNo != null">#{optionNo},</if>
-                <if test="item.hideQuestion != null">#{hideQuestion},</if>
-                <if test="item.showQuestion != null">#{showQuestion},</if>
-                <if test="item.isWtqd != null">#{isWtqd},</if>
-                <if test="item.wtqdType != null">#{wtqdType},</if>
-                <if test="item.wtqdValue != null">#{wtqdValue},</if>
-                <if test="item.wtqdSymbol != null">#{wtqdSymbol},</if>
-                <if test="item.wtqdDesc != null">#{wtqdDesc},</if>
-                <if test="item.isExtend != null">#{isExtend},</if>
-                <if test="item.createTime != null">#{createTime},</if>
-                <if test="item.logicSymbol != null">#{logicSymbol},</if>
-                <if test="item.surveyId != null">#{surveyId},</if>
-                <if test="item.bookCode != null">#{bookCode},</if>
+                #{item.questionId}, #{item.optionCode}, #{item.optionText}, #{item.optionNo}, #{item.hideQuestion}, #{item.showQuestion}, #{item.isWtqd}, #{item.wtqdType}, #{item.wtqdValue},
+                #{item.wtqdSymbol}, #{item.wtqdDesc}, #{item.isExtend}, #{item.createTime}, #{item.logicSymbol}, #{item.surveyId}, #{item.bookCode},
             </trim>
         </foreach>
     </insert>

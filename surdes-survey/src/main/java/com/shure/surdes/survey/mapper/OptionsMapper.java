@@ -2,6 +2,7 @@ package com.shure.surdes.survey.mapper;
 
 import com.shure.surdes.survey.domain.Options;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public interface OptionsMapper {
      * @param optionList 问卷选项列表
      * @return 结果
      */
-    public int insertOptionBatch(List<Options> optionList);
+    public int insertOptionBatch(@Param("optionList") List<Options> optionList);
 
     /**
      * 修改问卷选项

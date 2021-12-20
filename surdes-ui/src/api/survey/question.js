@@ -26,7 +26,7 @@ export function getQuestion(questionId) {
 }
 
 // 新增问卷题目
-export function addQuestion(data) {
+export function saveQuestion(data) {
   return request({
     url: '/survey/question',
     method: 'post',

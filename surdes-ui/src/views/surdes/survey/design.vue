@@ -57,7 +57,7 @@
 
 <script>
 import { getSurvey } from "@/api/survey/survey";
-import { listBySurveyId, updateQueNo} from "@/api/survey/question";
+import { listBySurveyId, updateQueNo, saveQuestion, delQuestion} from "@/api/survey/question";
 import { ArrayUtil } from "@/utils/arrayUtil";
 import Question from '../question/index';
 
@@ -115,6 +115,7 @@ export default{
 				this.questionList = response.data;
 			})
 		},
+		/** 新增问题  **/
 		addQuestion(questionType){
 			let question = {
 				questionId: null,
@@ -140,12 +141,15 @@ export default{
 			this.questionList.push(question);
 			this.updateIndex();
 		},
+		/** 保存问题 **/
 		saveQuestion(question, func){
-			addQuestion(question).then(res => {
+			console.log(question)
+			saveQuestion(question).then(res => {
 				func(res)
 				console.log(res)
 			})
 		},
+		/** 插入问题 **/
 		insertQuestion(index){
 			let question = {
 				questionId: null,
@@ -170,11 +174,13 @@ export default{
 			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
 			this.updateIndex();
 		},
+		/** 复制问题 **/
 		copyQuestion(index){
 			const q = this.questionList[index];
 			this.questionList.push({...q,questionId: ''});
 			this.updateIndex();
 		},
+		/** 删除问题 **/
 		delQuestion(index){
 			let questionId = this.questionList[index].questionId;
       if (questionId) {
@@ -183,17 +189,21 @@ export default{
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          this.questionList = ArrayUtil.delete(this.questionList, index);
+        	delQuestion(questionId).then(res => {
+        		this.$message({
+	            type: 'success',
+	            message: '删除成功!'
+	          });
+	          this.questionList = ArrayUtil.delete(this.questionList, index);
+	          this.updateIndex();
+        	})
         });
       } else {
         this.questionList = ArrayUtil.delete(this.questionList, index);
+        this.updateIndex();
       }
-      this.updateIndex();
 		},
+		/** 上移问题 **/
 		upQuestion(index){
 			if (this.questionList.length == 0 || index === 0) {
         return;
@@ -201,6 +211,7 @@ export default{
       this.questionList = ArrayUtil.moveUp(this.questionList, index);
       this.updateIndex();
 		},
+		/** 下移问题 **/
 		downQuestion(index){
 			if (this.questionList.length == 0 || index === this.questionList.length - 1) {
         return;
@@ -208,6 +219,7 @@ export default{
       this.questionList = ArrayUtil.moveDown(this.questionList, index);
       this.updateIndex();
 		},
+		/** 更新序号 **/
 		updateIndex(){
 			let j = 1;
 			this.queNoes = [];
@@ -224,6 +236,7 @@ export default{
 				})
 			})
 		},
+		/** 更新排序 **/
 		updateQuestionNo(){
 			updateQueNo(this.queNoes).then(res => {
 				console.log(res)

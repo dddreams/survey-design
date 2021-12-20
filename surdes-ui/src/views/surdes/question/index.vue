@@ -175,28 +175,24 @@ export default{
 					break;
 			}
 		},
-		insertQuestion(){
-			this.$emit('insertQuestion', this.index)
-		},
+		insertQuestion(){this.$emit('insertQuestion', this.index)},
 		editQuestion(){
 			this.isEdit = true
 		},
 		saveQuestion(){
-			this.$emit('delQuestion', this.question, (res)=>{
+			this.$emit('saveQuestion', this.question, (res)=>{
 				this.isEdit = false
 			})
 		},
 		copyQuestion(){this.$emit('copyQuestion', this.index)},
-		delQuestion(){
-			this.$emit('delQuestion', this.index)
-		},
+		delQuestion(){this.$emit('delQuestion', this.index)},
 		upQuestion(){this.$emit('upQuestion', this.index)},
 		downQuestion(){this.$emit('downQuestion', this.index)},
 		addOption(){
 			let option = {
 				optionId: '',
 				questionId: this.question.questionId,
-				optionCode: '',
+				optionCode: this.question.options.length + 1,
 				optionText: '选项' + (this.question.options.length + 1)*1,
 				optionNo: this.question.options.length + 1,
 				hideQuestion: '',
