@@ -1,8 +1,8 @@
 @font-face {
   font-family: "element-icons"; /* Project id 2878107 */
-  src: url('fonts/iconfont.woff2?t=1634630199847') format('woff2'),
-       url('fonts/iconfont.woff?t=1634630199847') format('woff'),
-       url('fonts/iconfont.ttf?t=1634630199847') format('truetype');
+  src: url('iconfont.woff2?t=1640074696286') format('woff2'),
+       url('iconfont.woff?t=1640074696286') format('woff'),
+       url('iconfont.ttf?t=1640074696286') format('truetype');
 }
 
 .element-icons {
@@ -11,6 +11,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.el-icon-luoji1:before {
+  content: "\e612";
+}
+
+.el-icon-fabu:before {
+  content: "\e62f";
+}
+
+.el-icon-yulan:before {
+  content: "\e621";
+}
+
+.el-icon-jisuanqi:before {
+  content: "\e630";
+}
+
+.el-icon-luoji:before {
+  content: "\e6b3";
 }
 
 .el-icon-r-add:before {

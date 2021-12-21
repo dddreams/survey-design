@@ -48,6 +48,29 @@
     					@upQuestion="upQuestion"
     					@downQuestion="downQuestion"/>
     			</div>
+    		
+    			<div class="rig-card">
+	    			<el-tooltip class="item" effect="dark" content="预览" placement="right">
+		    			<div class="card-item yulan" @click="handlePreview">
+		    				<i class="el-icon-yulan"></i>
+		    			</div>
+	    			</el-tooltip>
+	    			<el-tooltip class="item" effect="dark" content="发布" placement="right">
+		    			<div class="card-item fabu">
+		    				<i class="el-icon-fabu"></i>
+		    			</div>
+	    			</el-tooltip>
+	    			<el-tooltip class="item" effect="dark" content="设置逻辑" placement="right">
+		    			<div class="card-item luoji">
+		    				<i class="el-icon-luoji1"></i>
+		    			</div>
+	    			</el-tooltip>
+	    			<el-tooltip class="item" effect="dark" content="设置计算" placement="right">
+		    			<div class="card-item jisuan">
+		    				<i class="el-icon-jisuanqi"></i>
+		    			</div>
+	    			</el-tooltip>
+	    		</div>
     		</div>
     	</el-col>
     </el-row>
@@ -59,7 +82,7 @@
 import { getSurvey } from "@/api/survey/survey";
 import { listBySurveyId, updateQueNo, saveQuestion, delQuestion} from "@/api/survey/question";
 import { ArrayUtil } from "@/utils/arrayUtil";
-import Question from '../question/index';
+import Question from './question/question';
 
 export default{
 	name: 'Design',
@@ -146,7 +169,6 @@ export default{
 			console.log(question)
 			saveQuestion(question).then(res => {
 				func(res)
-				console.log(res)
 			})
 		},
 		/** 插入问题 **/
@@ -232,15 +254,25 @@ export default{
 				this.queNoes.push({
 					questionId: q.questionId,
 					questionNo: q.questionNo,
-					quesitonSort: q.questionSort
+					questionSort: q.questionSort
 				})
 			})
+			this.updateQuestionNo();
 		},
 		/** 更新排序 **/
 		updateQuestionNo(){
-			updateQueNo(this.queNoes).then(res => {
-				console.log(res)
+			const queNoes = this.queNoes.filter(q => {
+				return !!q.questionId
 			})
+			updateQueNo(queNoes).then(res => {
+				this.$message({
+          type: 'success',
+          message: '自动保存成功!'
+        });
+			})
+		},
+		handlePreview(){
+			console.log(this.surveyId)
 		},
 		handleClick(tab, event) {
       
@@ -255,7 +287,8 @@ export default{
   	padding: 0 10px;
   }
   .de-container{
-  	height: calc(100vh - 89px);overflow-y: auto;
+  	height: calc(100vh - 89px);
+  	overflow-y: auto;
   }
   .de-left{
   	background:  #fff;
@@ -265,10 +298,12 @@ export default{
   }
   .de-main{
   	background:  #fff;
-  	width:  85%;
+  	width:  770px;
   	margin: 0 auto;
   	margin-top: 5px;
   	min-height: 542px;
+  	margin-bottom: 50px;
+  	position: relative;
   }
   .el-collapse-item{
   	padding-left: 5px;
@@ -333,5 +368,38 @@ export default{
   }
   .s-box:hover .q-add{
   	display: block;
+  }
+  .rig-card{
+  	background: #fff;
+  	position: absolute;
+  	top: 10px;
+  	right: -58px;
+  	width: 48px;
+  	border: 1px solid #dadce0;
+  	display: flex;
+  	flex-direction: column;
+  	text-align: center;;
+  }
+  .rig-card .card-item{
+		padding: 10px 0;
+		font-size: 14px;
+		flex: 1;
+		color: #555;
+		cursor: pointer;
+  }
+  .rig-card .card-item:hover{
+  	  background-color: rgba(95,99,104,0.039);
+  }
+  .rig-card .card-item.yulan i{
+  	font-size: 16px;
+  }
+  .rig-card .card-item.fabu i{
+  	font-size: 20px;
+  }
+  .rig-card .card-item.luoji i{
+  	font-size: 24px;
+  }
+  .rig-card .card-item.jisuan i{
+  	font-size: 20px;
   }
 </style>

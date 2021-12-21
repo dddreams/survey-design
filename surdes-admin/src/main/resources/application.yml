@@ -35,7 +35,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.shure.surdes: debug
     org.springframework: warn
 
 # Spring配置

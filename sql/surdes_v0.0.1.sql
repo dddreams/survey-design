@@ -110,6 +110,7 @@ create table tb_question  (
 drop table if exists tb_options;
 create table tb_options  (
   option_id          bigint(20)          not null auto_increment           comment '选项主键',
+  survey_id          bigint(20)          not null                          comment '问卷主键',
   question_id        bigint(20)          not null                          comment '问题主键',
   option_code        varchar(64)         null                              comment '选项值',
   option_text        varchar(256)        not null                          comment '选项文本',
@@ -124,7 +125,6 @@ create table tb_options  (
   is_extend          char(1)             default '0'                       comment '是否扩展填空（1：是，0：否）',
   create_time        datetime                                              comment '创建时间',
   logic_symbol       varchar(8)          default null                      comment '显示逻辑比较符',
-  survey_id          bigint(20)          not null                          comment '问卷主键',
   book_code          char(12)            default ''                        comment '帐套编码',
   primary key (option_id) using btree,
   index inx_question_id(question_id) using btree,

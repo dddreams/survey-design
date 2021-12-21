@@ -117,8 +117,20 @@
 				</ul>
       </div>
 
+      <div class="topic-logic">
+      	<!-- 必填 -->
+      	<el-checkbox v-model="question.validateRule" true-label="notEmpty" false-label="" style="margin-right: 15px;">必填</el-checkbox>
+      	
+      	<!-- 初始隐藏 -->
+      	<el-checkbox v-model="question.showOrHide" true-label="1" false-label="0" style="margin-right: 15px;">初始隐藏</el-checkbox>
+
+      	<!-- 只读 -->
+      	<el-checkbox v-model="question.notEdit" true-label="1" false-label="0" style="margin-right: 15px;">只读</el-checkbox>
+      </div>
+
       <div class="topic-finish">
-				<el-button class="w-btn" type="warning" @click="saveQuestion">完成编辑</el-button>
+				<el-button class="w-btn" type="warning" @click="saveQuestion">保存编辑</el-button>
+				<el-button class="w-btn" type="default" @click="cancelEdit">取消编辑</el-button>
 			</div>
     </div>
 
@@ -180,8 +192,16 @@ export default{
 			this.isEdit = true
 		},
 		saveQuestion(){
+			// 对于多选题型，结果是一个数组，将数组转换为字符串存储
+			if(this.question.questionType == 'checkbox'){
+				this.question.defaultValue = this.question.defaultValue.toString();
+			}
 			this.$emit('saveQuestion', this.question, (res)=>{
 				this.isEdit = false
+				this.question = res.data
+				if(this.question.questionType == 'checkbox' && this.question.defaultValue){
+					this.question.defaultValue = this.question.defaultValue.split(',');
+				}
 			})
 		},
 		copyQuestion(){this.$emit('copyQuestion', this.index)},
@@ -259,7 +279,7 @@ export default{
 			}
       if(this.question.options.length == 0 && this.questionClass == 's') {
         this.addOption();
-        this.addOption();	
+        //this.addOption();	
       }
       if(this.questionClass != 's'){
       	this.question.options.length == 0
@@ -276,6 +296,10 @@ export default{
 		      obj.target.value = '';
 		  }
 		},
+		// 取消编辑
+		cancelEdit(){
+			this.isEdit = false
+		}
 	},
 	watch: {
 		'question.questionType':{

@@ -13,6 +13,18 @@
         padding-bottom: 1rem;
         font-size: .95rem;
         font-weight: bold;
+        .red{
+        	font-size:1.2rem; 
+        	color: red;
+        	vertical-align: sub;
+        }
+        .name-text{
+        	.label-tips{
+        		margin-left: 4px;
+        		color:#ccc;
+        		font-weight: normal;
+        	}
+        }
 	}
 	.q-btn{
 		height: 35px;
@@ -70,11 +82,15 @@
 		    }
 		}
     }
+
+    .topic-logic{
+    	margin-top: 8px;
+    }
     
     .topic-finish{
     	padding-top: 10px;
     	.w-btn{
-    		width: 100%;
+    		width: 49%;
     		padding: 8px 0;
     	}
     }

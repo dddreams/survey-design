@@ -105,7 +105,7 @@ public class QuestionController extends BaseController {
     @PreAuthorize("@ss.hasPermi('survey:survey:edit')")
     @Log(title = "更新问题序号和排序", businessType = BusinessType.UPDATE)
     @PutMapping("/updateQueNo")
-    public AjaxResult updateQueNo(@RequestParam("queNoes") List<Map<String, Object>> queNoes) {
+    public AjaxResult updateQueNo(@RequestBody List<Map<String, Object>> queNoes) {
         questionService.updateQuesiotnNo(queNoes);
         return AjaxResult.success();
     }

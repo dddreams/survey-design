@@ -2,7 +2,7 @@
 	<div>
 		<div class="q-option">
 			<div class="q-text">
-         {{ question.questionName }}
+        {{ question.questionName }}
       </div>
 		</div>
 	</div>

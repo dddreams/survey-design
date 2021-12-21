@@ -104,6 +104,7 @@
     <select id="selectQuestionListBySurvey" parameterType="Long" resultMap="QuestionResult">
         <include refid="selectQuestionVo"/>
         where t.survey_id = #{surveyId}
+        order by t.question_sort
     </select>
 
     <insert id="insertQuestion" parameterType="Question" useGeneratedKeys="true" keyProperty="questionId">
@@ -186,24 +187,28 @@
     <update id="updateQuesiotnNo" parameterType="java.util.List">
         update tb_question
         <trim prefix="set" suffixOverrides=",">
-            <trim prefix="question_no =case" suffix="end,">
-                <foreach collection="list" item="i" index="index">
-                    <if test="i.questionNo != null">
-                        when id=#{i.questionId} then #{i.questionNo}
+            <trim prefix="question_sort = case" suffix="end,">
+                <foreach collection="list" item="i">
+                    <if test="i.questionSort != null">
+                        when question_id=#{i.questionId} then #{i.questionSort}
                     </if>
                 </foreach>
             </trim>
-            <trim prefix="question_sort =case" suffix="end,">
-                <foreach collection="list" item="i" index="index">
-                    <if test="i.questionSort != null">
-                        when id=#{i.questionId} then #{i.questionSort}
+            <trim prefix="question_no = case" suffix="end,">
+                <foreach collection="list" item="i">
+                    <if test="i.questionNo != null">
+                        when question_id=#{i.questionId} then #{i.questionNo}
                     </if>
                 </foreach>
             </trim>
         </trim>
-        where
-        <foreach collection="list" separator="or" item="i" index="index">
-            id=#{i.questionId}
-        </foreach>
+        <where>
+            question_id in (
+            <foreach collection="list" separator="," item="i">
+                #{i.questionId}
+            </foreach>
+            )
+        </where>
+
     </update>
 </mapper>
