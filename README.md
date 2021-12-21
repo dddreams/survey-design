@@ -10,27 +10,47 @@
 
 1、后台管理：包括用户、部门、菜单、角色、通知、日志、监控等功能依赖于若依管理系统[点我传送](https://gitee.com/y_project/RuoYi-Vue)，版本3.7.0，感谢若依开源共享。
 
-2、问卷管理：包括创建问卷、问卷设计、预览发布、定时发布、定时结束
+2、问卷管理：包括创建问卷、设计问卷、复制问卷、预览问卷、发布问卷、定时发布、定时结束
+
+- 问题的分类、添加、删除、插入、复制、上移、下移等
+
+- 设置问题的显示逻辑、设置自动计算
 
 3、回收站：包括还原问卷、永久删除
 
 ...
 
-## 使用
+## 计划
 
-#### 安装
+- [ ] 
+- [x]  问卷的增删改查
 
-1、环境搭建请自行百度或参考项目 doc 目录的【若依管理环境使用手册】
+- [x]  设计问卷
+
+- [ ]  复制问卷
+
+- [ ]  预览问卷
+
+- [ ]  发布问卷
+
+- [ ]  定时发布
+
+- [x]  问题的新增、插入、删除、上移、下移
+
+- [ ]  问题的逻辑与自动计算
+
+- [ ]  ...
+
+## 效果图
+
+![list.png](https://s2.loli.net/2021/12/21/FgPrhHXNktxmLA4.png)
+
+![design.png](https://s2.loli.net/2021/12/21/QHk2j43DKUpI5Xa.png)
+
+![design1.png](https://s2.loli.net/2021/12/21/gXQ3v7JfDVtmWlT.png)
 
 ## 开源地址
 
 github地址：[https://github.com/dddreams/survey-design](https://github.com/dddreams/survey-design)
 
 gitee地址：[https://gitee.com/shure/survey-design](https://gitee.com/shure/survey-design)
-
-
-
-
-
-
-
