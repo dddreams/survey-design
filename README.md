@@ -20,7 +20,7 @@
 
 ...
 
-## 计划
+## TODO
 
 - [x] 问卷的增删改查
 
@@ -39,6 +39,10 @@
 - [ ] 问题的逻辑与自动计算
 
 - [ ] ...
+
+## 致谢
+
+问卷设计的系统开发基于个人学习和兴趣，由于技术水平与经验的不足，系统尚有很多不足之处，如有BUG或需求请提交[Issues · dddreams/survey-design · GitHub](https://github.com/dddreams/survey-design/issues) 反馈，另外感谢[若依后台管理](https://gitee.com/y_project/RuoYi-Vue)的开源，也欢迎提供指正和建议，感谢各位的支持。
 
 ## 效果图
 
