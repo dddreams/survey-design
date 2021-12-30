@@ -19,7 +19,7 @@
     		</div>
     	</el-col>
 
-    	<el-col :span="19" :xs="24" class="de-container">
+    	<el-col :span="19" :xs="24" class="de-container" @scroll.native="scrollHandle">
     		<div class="de-main">
     			<div class="s-box">
     				<h2 class="s-title">{{ survey.surveyName }}</h2>
@@ -98,6 +98,9 @@ export default{
 			queNoes: []
 		}
 	},
+	created(){
+	
+	},
 	mounted(){
 		setTimeout(()=>{
 			this.initQuesType()
@@ -106,6 +109,11 @@ export default{
 		this.getQuestionList();
 	},
 	methods: {
+		scrollHandle(event){
+			let top = event.target.scrollTop;
+ 			let rigCard = document.querySelector('.rig-card');
+ 			rigCard.style.top = top + 'px';
+		},
 		/** 问题类型初始化数据处理 */
 		initQuesType(){
 			let tempArr = [];
@@ -271,8 +279,13 @@ export default{
         });
 			})
 		},
+		/** 预览 **/
 		handlePreview(){
-			console.log(this.surveyId)
+			var routeUrl = this.$router.resolve({
+        path: '/preview',
+        query: { surveyId: this.surveyId }
+      });
+      window.open(routeUrl.href, "_blank");
 		},
 		handleClick(tab, event) {
       

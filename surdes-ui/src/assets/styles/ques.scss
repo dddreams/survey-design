@@ -45,12 +45,16 @@
 		}
 	}
 }
-.q-box:hover, .border{
+.q-box:not(.preview):hover, .border{
 	background: #fafafa;
 	border-color:  #e0e0e0;
 	.q-btn{
 		opacity: 1;
 	}
+}
+.q-box.preview{
+	cursor: auto;
+	padding-bottom: 25px;
 }
 .q-config{
     background: #fafafa;

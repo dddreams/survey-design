@@ -329,7 +329,11 @@ export default {
     },
     /** 预览按钮操作 */
     handlePreview(row){
-
+      var routeUrl = this.$router.resolve({
+        path: '/preview',
+        query: { surveyId: row.surveyId }
+      });
+      window.open(routeUrl.href, "_blank");
     },
     /** 提交按钮 */
     submitForm() {

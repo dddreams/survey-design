@@ -18,6 +18,7 @@
         <result property="relationResult" column="relation_result"/>
         <result property="notEdit" column="not_edit"/>
         <result property="defaultValue" column="default_value"/>
+        <result property="optionDisplay" column="option_display"/>
         <result property="formula" column="formula"/>
         <result property="bookCode" column="book_code"/>
         <collection property="options" javaType="java.util.List" resultMap="optionResult"/>
@@ -57,6 +58,7 @@
                t.not_edit,
                t.default_value,
                t.formula,
+               t.option_display,
                o.option_id,
                o.question_id,
                o.option_code,
@@ -90,6 +92,7 @@
             <if test="relationResult != null  and relationResult != ''">and relation_result = #{relationResult}</if>
             <if test="notEdit != null  and notEdit != ''">and not_edit = #{notEdit}</if>
             <if test="defaultValue != null  and defaultValue != ''">and default_value = #{defaultValue}</if>
+            <if test="optionDisplay != null  and optionDisplay != ''">and option_display = #{optionDisplay}</if>
             <if test="formula != null  and formula != ''">and formula = #{formula}</if>
             <if test="bookCode != null  and bookCode != ''">and book_code = #{bookCode}</if>
         </where>
@@ -122,6 +125,7 @@
             <if test="relationResult != null">relation_result,</if>
             <if test="notEdit != null">not_edit,</if>
             <if test="defaultValue != null">default_value,</if>
+            <if test="optionDisplay != null">option_display,</if>
             <if test="formula != null">formula,</if>
             <if test="bookCode != null">book_code,</if>
         </trim>
@@ -138,6 +142,7 @@
             <if test="relationResult != null">#{relationResult},</if>
             <if test="notEdit != null">#{notEdit},</if>
             <if test="defaultValue != null">#{defaultValue},</if>
+            <if test="optionDisplay != null">#{optionDisplay},</if>
             <if test="formula != null">#{formula},</if>
             <if test="bookCode != null">#{bookCode},</if>
         </trim>
@@ -158,6 +163,7 @@
             <if test="relationResult != null">relation_result = #{relationResult},</if>
             <if test="notEdit != null">not_edit = #{notEdit},</if>
             <if test="defaultValue != null">default_value = #{defaultValue},</if>
+            <if test="optionDisplay != null">option_display = #{optionDisplay},</if>
             <if test="formula != null">formula = #{formula},</if>
             <if test="bookCode != null">book_code = #{bookCode},</if>
         </trim>

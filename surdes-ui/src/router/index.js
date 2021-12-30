@@ -162,8 +162,14 @@ export const constantRoutes = [
         component: (resolve) => require(['@/views/surdes/survey/design'], resolve),
         name: 'SurveyDesign',
         meta: { title: '问卷设计', activeMenu: '/survey/survey'}
-      }
+      },
     ]
+  },
+  {
+    path: '/preview',
+    component: () => import('@/views/surdes/survey/preview'),
+    name: 'SurveyPreview',
+    meta: { title: '问卷预览', activeMenu: '/preview'}
   }
 ]
 
