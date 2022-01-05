@@ -58,7 +58,7 @@
 			<!-- 标题 -->
 			<div class="topic-title">
         <!-- <span>标题：</span> -->
-        <el-input v-model="question.questionName" type="textarea" @focus="focusTitle" rows="2" style="width:100%" placeholder="请输入标题"></el-input>
+        <el-input v-model="question.questionName" type="textarea" @focus="focusTitle" rows="2" style="width:100%" placeholder="请输入标题" ref="questionTitle"></el-input>
       </div>
 
       <!-- 规则配置 -->
@@ -196,6 +196,9 @@ export default{
 			if(this.question.questionType == 'checkbox'){
 				this.question.defaultValue = this.question.defaultValue.toString();
 			}
+			if(this.questionClass == 't'){
+				this.question.questionNo = null
+			}
 			this.$emit('saveQuestion', this.question, (res)=>{
 				this.isEdit = false
 				this.question = res.data
@@ -274,15 +277,16 @@ export default{
 		  this.question.options = ArrayUtil.moveDown(this.question.options, index);
 		},
 		refreshOption(){
-			if(this.question.questionId){
-				return;
-			}
       if(this.question.options.length == 0 && this.questionClass == 's') {
         this.addOption();
         //this.addOption();	
       }
       if(this.questionClass != 's'){
       	this.question.options.length == 0
+      }
+      if(this.question.options.length == 1 && this.question.options[0].qotionId == null){
+      	this.question.options = []
+      	this.addOption();
       }
     },
 		focusTitle(){
@@ -307,6 +311,15 @@ export default{
         this.question.questionType = val
         this.initClass();
         this.refreshOption();
+      },
+    },
+    'isEdit':{
+      handler: function (val) {
+        if(val){
+        	setTimeout(() => {
+        		this.$refs['questionTitle'].focus() 
+        	}, 50)
+        }
       },
     }
 	}

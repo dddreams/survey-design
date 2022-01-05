@@ -36,11 +36,12 @@
     			</div>
     			<div class="s-quesitions">
     				<Question 
+    					ref="question"
     					v-for="(question, i) in questionList" 
     					:question="question" 
     					:surveyId="surveyId" 
     					:index="i"
-    					:key="question.questionNo"
+    					:key="question.questionSort"
     					@saveQuestion="saveQuestion"
     					@insertQuestion="insertQuestion"
     					@copyQuestion="copyQuestion"
@@ -187,7 +188,7 @@ export default{
 		    questionNo: null,
 		    questionSort: null,
 		    questionName: '请输入标题',
-		    questionType: index == -1 ? 'title' : 'input',
+		    questionType: index == -1 ? 'title' : 'radio',
 		    validateRule: null,
 		    showOrHide: '0',
 		    questionAttr: null,
@@ -203,6 +204,10 @@ export default{
 			};
 			this.questionList = ArrayUtil.insertNext(this.questionList,index,question);
 			this.updateIndex();
+			setTimeout(() => {
+				this.$refs['question'][index + 1].isEdit = true
+			}, 50)
+			
 		},
 		/** 复制问题 **/
 		copyQuestion(index){

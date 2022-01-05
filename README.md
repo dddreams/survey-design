@@ -28,7 +28,9 @@
 
 - [ ] 复制问卷
 
-- [ ] 预览问卷
+- [x] 预览问卷
+
+- [ ] 手机端预览
 
 - [ ] 发布问卷
 
@@ -37,6 +39,8 @@
 - [x] 问题的新增、插入、删除、上移、下移
 
 - [ ] 问题的逻辑与自动计算
+
+- [ ] 问卷数据采集，数据校验，备注填写
 
 - [ ] ...
 
@@ -51,6 +55,8 @@
 ![design.png](https://s2.loli.net/2021/12/21/QHk2j43DKUpI5Xa.png)
 
 ![design1.png](https://s2.loli.net/2021/12/21/gXQ3v7JfDVtmWlT.png)
+
+![QQ截图20220105172550.png](https://s2.loli.net/2022/01/05/edFLivWqmnPM6fc.png)
 
 ## 开源地址
 
