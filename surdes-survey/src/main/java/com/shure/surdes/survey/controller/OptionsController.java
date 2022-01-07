@@ -1,4 +1,4 @@
-package com.shure.surdes.web.controller.survey;
+package com.shure.surdes.survey.controller;
 
 import com.shure.surdes.common.annotation.Log;
 import com.shure.surdes.common.core.controller.BaseController;
